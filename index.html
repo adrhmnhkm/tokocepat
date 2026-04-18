@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TokoCepat — Jualan Online Simpel untuk Seller Indonesia</title>
+    <meta name="description" content="Bikin halaman jualan dalam 5 menit, closing via WhatsApp, terima QRIS & transfer. Cocok untuk seller IG, TikTok, UMKM, dan reseller." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root {
+        --green:      #16a34a;
+        --green-dark: #15803d;
+        --green-light:#dcfce7;
+        --green-mid:  #bbf7d0;
+        --dark:       #0a0f1e;
+        --dark2:      #111827;
+        --slate:      #1e293b;
+        --body:       #f8fafc;
+        --card:       #ffffff;
+        --border:     #e2e8f0;
+        --muted:      #64748b;
+        --text:       #0f172a;
+        --radius:     14px;
+        --shadow:     0 4px 24px rgba(0,0,0,.07);
+        --shadow-md:  0 8px 40px rgba(0,0,0,.12);
+      }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        font-family: 'Inter', system-ui, sans-serif;
+        background: var(--body);
+        color: var(--text);
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .wrap { width: min(1100px, 90%); margin-inline: auto; }
+
+      /* ─── NAVBAR ─── */
+      nav {
+        position: sticky; top: 0; z-index: 100;
+        background: rgba(255,255,255,.85);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-inner {
+        display: flex; align-items: center; justify-content: space-between;
+        height: 64px;
+      }
+      .logo {
+        font-size: 1.2rem; font-weight: 800;
+        color: var(--text); text-decoration: none;
+        display: flex; align-items: center; gap: 8px;
+      }
+      .logo-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green); }
+      .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+      .nav-links a { text-decoration: none; color: var(--muted); font-size: .92rem; font-weight: 500; transition: color .2s; }
+      .nav-links a:hover { color: var(--text); }
+      .nav-cta {
+        background: var(--green); color: #fff !important;
+        padding: 8px 18px; border-radius: 999px;
+        font-weight: 600 !important; transition: background .2s !important;
+      }
+      .nav-cta:hover { background: var(--green-dark) !important; color: #fff !important; }
+      .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; border: none; background: none; padding: 4px; }
+      .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: .3s; }
+
+      /* ─── HERO ─── */
+      .hero {
+        padding: 96px 0 80px;
+        background: linear-gradient(160deg, #f0fdf4 0%, #f8fafc 60%, #eff6ff 100%);
+        position: relative; overflow: hidden;
+      }
+      .hero::before {
+        content: '';
+        position: absolute; inset: 0;
+        background: radial-gradient(ellipse 60% 50% at 70% 40%, rgba(22,163,74,.08), transparent);
+        pointer-events: none;
+      }
+      .hero-inner {
+        display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center;
+      }
+      .hero-badge {
+        display: inline-flex; align-items: center; gap: 6px;
+        background: var(--green-light); color: #166534;
+        font-size: .8rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+        padding: 5px 12px; border-radius: 999px;
+        border: 1px solid var(--green-mid);
+        margin-bottom: 20px;
+      }
+      .hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+      .hero h1 {
+        font-size: clamp(2rem, 5.5vw, 3.2rem);
+        font-weight: 800; line-height: 1.15;
+        letter-spacing: -.02em; color: var(--dark);
+        margin-bottom: 20px;
+      }
+      .hero h1 .hl { color: var(--green); }
+      .hero p {
+        font-size: 1.05rem; color: var(--muted);
+        max-width: 520px; margin-bottom: 32px;
+      }
+      .hero-btns { display: flex; flex-wrap: wrap; gap: 12px; }
+      .btn {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 13px 22px; border-radius: 999px;
+        font-weight: 600; font-size: .95rem;
+        text-decoration: none; border: none; cursor: pointer;
+        transition: all .2s; white-space: nowrap;
+      }
+      .btn-green { background: var(--green); color: #fff; box-shadow: 0 4px 16px rgba(22,163,74,.3); }
+      .btn-green:hover { background: var(--green-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(22,163,74,.35); }
+      .btn-outline { background: #fff; color: var(--text); border: 1.5px solid var(--border); }
+      .btn-outline:hover { border-color: #94a3b8; transform: translateY(-1px); }
+      .hero-mockup {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        box-shadow: var(--shadow-md);
+        overflow: hidden;
+        max-width: 420px;
+        margin-inline: auto;
+        width: 100%;
+      }
+      .mockup-bar {
+        background: #f1f5f9; padding: 10px 16px;
+        display: flex; align-items: center; gap: 6px;
+        border-bottom: 1px solid var(--border);
+      }
+      .mockup-dot { width: 10px; height: 10px; border-radius: 50%; }
+      .mockup-url {
+        flex: 1; background: #e2e8f0; border-radius: 6px;
+        height: 22px; margin-left: 8px;
+        display: flex; align-items: center; padding: 0 10px;
+        font-size: .72rem; color: var(--muted);
+      }
+      .mockup-body { padding: 20px; }
+      .store-header {
+        display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+      }
+      .store-avatar {
+        width: 44px; height: 44px; border-radius: 12px;
+        background: linear-gradient(135deg, var(--green), #4ade80);
+        display: grid; place-items: center; font-size: 1.2rem;
+      }
+      .store-name { font-weight: 700; font-size: .95rem; }
+      .store-sub  { font-size: .78rem; color: var(--muted); }
+      .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+      .product-card {
+        border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+        background: #fafafa;
+      }
+      .product-img {
+        height: 80px;
+        display: grid; place-items: center;
+        font-size: 1.8rem;
+      }
+      .product-img.a { background: #fef9c3; }
+      .product-img.b { background: #fce7f3; }
+      .product-img.c { background: #ede9fe; }
+      .product-img.d { background: #dbeafe; }
+      .product-info { padding: 8px; }
+      .product-info .pname { font-size: .75rem; font-weight: 600; margin-bottom: 2px; }
+      .product-info .pprice { font-size: .72rem; color: var(--green); font-weight: 700; }
+      .wa-btn {
+        margin-top: 14px;
+        display: flex; align-items: center; justify-content: center; gap: 6px;
+        background: #25d366; color: #fff;
+        padding: 10px; border-radius: 10px;
+        font-size: .82rem; font-weight: 700;
+      }
+
+      /* ─── SOCIAL PROOF BAR ─── */
+      .proof-bar {
+        background: var(--dark2); padding: 20px 0;
+      }
+      .proof-inner {
+        display: flex; flex-wrap: wrap; justify-content: center; gap: 32px;
+      }
+      .proof-item {
+        display: flex; align-items: center; gap: 8px;
+        color: #94a3b8; font-size: .88rem;
+      }
+      .proof-item strong { color: #f1f5f9; font-weight: 700; }
+
+      /* ─── SECTIONS ─── */
+      section { padding: 80px 0; }
+      .section-label {
+        display: inline-block;
+        font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+        color: var(--green); margin-bottom: 10px;
+      }
+      .section-title {
+        font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+        font-weight: 800; line-height: 1.2; letter-spacing: -.02em;
+        margin-bottom: 14px;
+      }
+      .section-sub { color: var(--muted); max-width: 520px; font-size: 1rem; margin-bottom: 40px; }
+
+      /* ─── PROBLEM ─── */
+      #problem { background: var(--dark); }
+      #problem .section-label { color: #f87171; }
+      #problem .section-title { color: #f1f5f9; }
+      #problem .section-sub { color: #94a3b8; }
+      .problem-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+      .problem-item {
+        display: flex; align-items: flex-start; gap: 14px;
+        background: rgba(255,255,255,.05);
+        border: 1px solid rgba(255,255,255,.08);
+        border-radius: var(--radius); padding: 18px;
+        transition: border-color .2s;
+      }
+      .problem-item:hover { border-color: rgba(248,113,113,.3); }
+      .problem-icon {
+        width: 40px; height: 40px; border-radius: 10px;
+        background: rgba(248,113,113,.15);
+        display: grid; place-items: center;
+        font-size: 1.1rem; flex-shrink: 0;
+      }
+      .problem-item h3 { font-size: .95rem; font-weight: 700; color: #f1f5f9; margin-bottom: 4px; }
+      .problem-item p  { font-size: .88rem; color: #94a3b8; margin: 0; }
+
+      /* ─── SOLUTION ─── */
+      #solution { background: linear-gradient(160deg, #f0fdf4, #f8fafc); }
+      .solution-grid { display: grid; gap: 24px; }
+      .solution-card {
+        background: var(--card); border: 1px solid var(--border);
+        border-radius: 18px; padding: 28px;
+        box-shadow: var(--shadow);
+        transition: box-shadow .2s, transform .2s;
+      }
+      .solution-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+      .solution-icon {
+        width: 48px; height: 48px; border-radius: 14px;
+        background: var(--green-light); display: grid; place-items: center;
+        font-size: 1.3rem; margin-bottom: 14px;
+        border: 1px solid var(--green-mid);
+      }
+      .solution-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+      .solution-card p  { font-size: .9rem; color: var(--muted); margin: 0; }
+
+      /* ─── STEPS ─── */
+      #steps { background: #fff; }
+      .steps-grid { display: grid; grid-template-columns: 1fr; gap: 0; position: relative; }
+      .step {
+        display: flex; gap: 20px; align-items: flex-start;
+        padding: 28px 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .step:last-child { border-bottom: none; }
+      .step-num {
+        width: 40px; height: 40px; border-radius: 50%;
+        background: var(--green); color: #fff;
+        display: grid; place-items: center;
+        font-weight: 800; font-size: .95rem; flex-shrink: 0;
+      }
+      .step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+      .step p  { font-size: .9rem; color: var(--muted); margin: 0; }
+
+      /* ─── TESTIMONI ─── */
+      #testimoni { background: var(--body); }
+      .testi-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+      .testi-card {
+        background: var(--card); border: 1px solid var(--border);
+        border-radius: 18px; padding: 24px;
+        box-shadow: var(--shadow);
+        transition: box-shadow .2s, transform .2s;
+      }
+      .testi-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+      .stars { color: #f59e0b; font-size: .9rem; margin-bottom: 12px; letter-spacing: 2px; }
+      .testi-card blockquote {
+        font-size: .95rem; color: var(--text);
+        font-style: normal; margin-bottom: 16px;
+        line-height: 1.6;
+      }
+      .testi-author { display: flex; align-items: center; gap: 10px; }
+      .testi-avatar {
+        width: 38px; height: 38px; border-radius: 50%;
+        background: linear-gradient(135deg, var(--green), #4ade80);
+        display: grid; place-items: center;
+        font-weight: 700; color: #fff; font-size: .85rem;
+      }
+      .testi-name   { font-weight: 700; font-size: .9rem; }
+      .testi-role   { font-size: .8rem; color: var(--muted); }
+
+      /* ─── CTA ─── */
+      #cta { background: var(--dark); padding: 80px 0; }
+      .cta-box {
+        background: linear-gradient(135deg, #15803d, #166534);
+        border-radius: 24px; padding: 56px 40px;
+        text-align: center;
+        box-shadow: 0 20px 60px rgba(22,163,74,.25);
+        position: relative; overflow: hidden;
+      }
+      .cta-box::before {
+        content: '';
+        position: absolute; inset: 0;
+        background: radial-gradient(ellipse 50% 60% at 80% 20%, rgba(255,255,255,.08), transparent);
+        pointer-events: none;
+      }
+      .cta-box h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 800; color: #fff; margin-bottom: 12px; letter-spacing: -.02em; }
+      .cta-box p  { color: rgba(255,255,255,.8); font-size: 1rem; margin-bottom: 28px; }
+      .cta-btns   { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+      .btn-white  { background: #fff; color: var(--green-dark); }
+      .btn-white:hover { background: var(--green-light); }
+      .btn-ghost  { background: rgba(255,255,255,.12); color: #fff; border: 1.5px solid rgba(255,255,255,.25); }
+      .btn-ghost:hover { background: rgba(255,255,255,.2); }
+
+      /* ─── FAQ ─── */
+      #faq { background: var(--body); }
+      .faq-list { display: grid; gap: 10px; max-width: 700px; }
+      details {
+        background: var(--card); border: 1px solid var(--border);
+        border-radius: var(--radius); overflow: hidden;
+        transition: box-shadow .2s;
+      }
+      details[open] { box-shadow: var(--shadow); }
+      summary {
+        padding: 18px 20px; font-weight: 700; font-size: .95rem;
+        cursor: pointer; list-style: none;
+        display: flex; justify-content: space-between; align-items: center;
+      }
+      summary::-webkit-details-marker { display: none; }
+      summary::after {
+        content: '+'; font-size: 1.3rem; color: var(--green);
+        transition: transform .2s; flex-shrink: 0;
+      }
+      details[open] summary::after { transform: rotate(45deg); }
+      .faq-ans { padding: 0 20px 18px; color: var(--muted); font-size: .92rem; }
+
+      /* ─── FOOTER ─── */
+      footer {
+        background: var(--dark2);
+        padding: 40px 0 32px;
+        color: #64748b; font-size: .88rem;
+      }
+      .footer-inner {
+        display: flex; flex-wrap: wrap;
+        justify-content: space-between; align-items: center; gap: 16px;
+      }
+      .footer-logo { font-weight: 800; color: #f1f5f9; font-size: 1rem; }
+      .footer-links { display: flex; gap: 20px; }
+      .footer-links a { color: #64748b; text-decoration: none; transition: color .2s; }
+      .footer-links a:hover { color: #cbd5e1; }
+
+      /* ─── GRID BREAKPOINTS ─── */
+      @media (min-width: 640px) {
+        .problem-grid { grid-template-columns: 1fr 1fr; }
+        .testi-grid   { grid-template-columns: 1fr 1fr; }
+      }
+      @media (min-width: 900px) {
+        .hero-inner    { grid-template-columns: 1fr 1fr; }
+        .solution-grid { grid-template-columns: repeat(3, 1fr); }
+        .testi-grid    { grid-template-columns: repeat(3, 1fr); }
+        .steps-grid    { grid-template-columns: repeat(3, 1fr); }
+        .step          { flex-direction: column; border-bottom: none; border-right: 1px solid var(--border); padding: 0 28px 0 0; }
+        .step:last-child { border-right: none; }
+      }
+      @media (max-width: 680px) {
+        .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; background: #fff; flex-direction: column; padding: 16px 24px; border-bottom: 1px solid var(--border); gap: 16px; z-index: 99; }
+        .nav-links.open { display: flex; }
+        .hamburger { display: flex; }
+        .cta-box { padding: 40px 24px; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- NAVBAR -->
+    <nav>
+      <div class="wrap nav-inner">
+        <a href="#" class="logo">
+          <span class="logo-dot"></span>
+          TokoCepat
+        </a>
+        <ul class="nav-links" id="navlinks">
+          <li><a href="#problem">Masalah</a></li>
+          <li><a href="#solution">Fitur</a></li>
+          <li><a href="#steps">Cara Kerja</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#cta" class="nav-cta">Mulai Gratis</a></li>
+        </ul>
+        <button class="hamburger" aria-label="menu" onclick="document.getElementById('navlinks').classList.toggle('open')">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="wrap">
+        <div class="hero-inner">
+          <div class="hero-content">
+            <div class="hero-badge"><span class="dot"></span> Khusus Seller Indonesia</div>
+            <h1>Jualan Online <span class="hl">Lebih Cepat</span>, Closing Lewat WhatsApp</h1>
+            <p>Bikin halaman jualan dalam 5 menit, bagikan satu link ke IG/TikTok/WhatsApp, dan terima pembayaran digital lokal langsung. Tanpa coding, tanpa ribet.</p>
+            <div class="hero-btns">
+              <a href="#cta" class="btn btn-green">Mulai Gratis Sekarang →</a>
+              <a href="#solution" class="btn btn-outline">Lihat Fitur</a>
+            </div>
+          </div>
+          <div>
+            <div class="hero-mockup">
+              <div class="mockup-bar">
+                <div class="mockup-dot" style="background:#f87171"></div>
+                <div class="mockup-dot" style="background:#fbbf24"></div>
+                <div class="mockup-dot" style="background:#4ade80"></div>
+                <div class="mockup-url">tokocepat.id/toko-rani</div>
+              </div>
+              <div class="mockup-body">
+                <div class="store-header">
+                  <div class="store-avatar">🛍️</div>
+                  <div>
+                    <div class="store-name">Toko Rani Official</div>
+                    <div class="store-sub">Fashion • Aksesoris • Hijab</div>
+                  </div>
+                </div>
+                <div class="product-grid">
+                  <div class="product-card">
+                    <div class="product-img a">👗</div>
+                    <div class="product-info">
+                      <div class="pname">Dress Casual</div>
+                      <div class="pprice">Rp 120.000</div>
+                    </div>
+                  </div>
+                  <div class="product-card">
+                    <div class="product-img b">👜</div>
+                    <div class="product-info">
+                      <div class="pname">Tas Mini</div>
+                      <div class="pprice">Rp 85.000</div>
+                    </div>
+                  </div>
+                  <div class="product-card">
+                    <div class="product-img c">🧣</div>
+                    <div class="product-info">
+                      <div class="pname">Hijab Segi</div>
+                      <div class="pprice">Rp 45.000</div>
+                    </div>
+                  </div>
+                  <div class="product-card">
+                    <div class="product-img d">💍</div>
+                    <div class="product-info">
+                      <div class="pname">Cincin Silver</div>
+                      <div class="pprice">Rp 35.000</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="wa-btn">💬 Chat via WhatsApp</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- SOCIAL PROOF BAR -->
+    <div class="proof-bar">
+      <div class="wrap">
+        <div class="proof-inner">
+          <div class="proof-item"><strong>500+</strong> seller sudah bergabung</div>
+          <div class="proof-item"><strong>5 menit</strong> rata-rata waktu setup</div>
+          <div class="proof-item"><strong>QRIS</strong> & transfer didukung</div>
+          <div class="proof-item"><strong>Mobile-first</strong> untuk buyer Indonesia</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROBLEM -->
+    <section id="problem">
+      <div class="wrap">
+        <span class="section-label">Masalah yang Sering Terjadi</span>
+        <h2 class="section-title" style="color:#f1f5f9">Kamu bukan kurang produk.<br>Alur jualannya yang bikin repot.</h2>
+        <p class="section-sub">Banyak seller sudah rajin promosi, tapi order tetap lambat masuk karena prosesnya masih manual dan berantakan.</p>
+        <div class="problem-grid">
+          <div class="problem-item">
+            <div class="problem-icon">💬</div>
+            <div>
+              <h3>Chat order bercampur-campur</h3>
+              <p>Order masuk bareng chat biasa, susah dilacak dan gampang terlewat.</p>
+            </div>
+          </div>
+          <div class="problem-item">
+            <div class="problem-icon">🌐</div>
+            <div>
+              <h3>Belum punya halaman jualan</h3>
+              <p>Pembeli bingung lihat produk dan tidak ada tempat yang jelas untuk order.</p>
+            </div>
+          </div>
+          <div class="problem-item">
+            <div class="problem-icon">💸</div>
+            <div>
+              <h3>Pembayaran masih manual</h3>
+              <p>Transfer dicek satu-satu, konfirmasi bayar bolak-balik, proses jadi lama.</p>
+            </div>
+          </div>
+          <div class="problem-item">
+            <div class="problem-icon">🤯</div>
+            <div>
+              <h3>Bingung mulai dari mana</h3>
+              <p>Website terasa rumit, banyak setting teknis yang tidak dimengerti.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOLUTION / FITUR -->
+    <section id="solution">
+      <div class="wrap">
+        <span class="section-label">Solusi &amp; Fitur Utama</span>
+        <h2 class="section-title">Semua yang kamu butuhkan<br>untuk mulai jualan online</h2>
+        <p class="section-sub">Tidak perlu belajar teknis. Cukup isi produk, bagikan link, dan mulai terima order hari ini.</p>
+        <div class="solution-grid">
+          <div class="solution-card">
+            <div class="solution-icon">🏪</div>
+            <h3>Halaman jualan siap pakai</h3>
+            <p>Buat toko online simpel tanpa coding. Isi nama, produk, harga, dan foto — selesai.</p>
+          </div>
+          <div class="solution-card">
+            <div class="solution-icon">🔗</div>
+            <h3>Satu link untuk semua channel</h3>
+            <p>Pasang di bio IG, TikTok, atau kirim langsung ke calon pembeli via WhatsApp.</p>
+          </div>
+          <div class="solution-card">
+            <div class="solution-icon">💬</div>
+            <h3>Closing via WhatsApp</h3>
+            <p>Pembeli bisa langsung chat per produk. Closing jadi lebih cepat dan tidak terlewat.</p>
+          </div>
+          <div class="solution-card">
+            <div class="solution-icon">💳</div>
+            <h3>Pembayaran digital lokal</h3>
+            <p>Terima QRIS dan transfer bank. Familiar untuk buyer Indonesia, proses lebih lancar.</p>
+          </div>
+          <div class="solution-card">
+            <div class="solution-icon">📱</div>
+            <h3>Mobile-first</h3>
+            <p>Tampilan enak dilihat dari HP. Karena mayoritas belanja online Indonesia lewat mobile.</p>
+          </div>
+          <div class="solution-card">
+            <div class="solution-icon">⚡</div>
+            <h3>Setup dalam 5 menit</h3>
+            <p>Tidak perlu domain, DNS, atau setting rumit. Daftar, isi produk, langsung jualan.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARA KERJA -->
+    <section id="steps">
+      <div class="wrap">
+        <span class="section-label">Cara Kerja</span>
+        <h2 class="section-title">3 langkah, langsung bisa jualan</h2>
+        <p class="section-sub">Prosesnya dibuat sesimpel mungkin supaya siapa pun bisa mulai tanpa bantuan teknis.</p>
+        <div class="steps-grid">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div>
+              <h3>Isi produk dan info toko</h3>
+              <p>Masukkan nama toko, foto produk, harga, dan deskripsi singkat. Selesai dalam hitungan menit.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div>
+              <h3>Bagikan link jualanmu</h3>
+              <p>Pasang di bio IG/TikTok atau kirim langsung ke grup WhatsApp dan calon pembeli.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div>
+              <h3>Terima order &amp; pembayaran</h3>
+              <p>Pembeli lihat produk, chat kamu via WhatsApp, lalu bayar pakai QRIS atau transfer.</p>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:40px">
+          <a href="#cta" class="btn btn-green">Mulai 3 Langkah Ini →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONI -->
+    <section id="testimoni">
+      <div class="wrap">
+        <span class="section-label">Testimoni</span>
+        <h2 class="section-title">Seller Indonesia sudah pakai</h2>
+        <p class="section-sub">Mereka yang dulu jualan manual, sekarang bisa terima order lebih rapi dan cepat.</p>
+        <div class="testi-grid">
+          <div class="testi-card">
+            <div class="stars">★★★★★</div>
+            <blockquote>"Dulu order masuk dari DM IG dicampur chat biasa, sering ketinggalan. Sekarang pembeli tinggal klik link, langsung chat WA, dan bayar. Closing jadi jauh lebih cepat."</blockquote>
+            <div class="testi-author">
+              <div class="testi-avatar">R</div>
+              <div>
+                <div class="testi-name">Rani Oktavia</div>
+                <div class="testi-role">Seller Fashion Instagram</div>
+              </div>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="stars">★★★★★</div>
+            <blockquote>"Saya jualan camilan rumahan. Dulu pembeli sering bingung cara ordernya. Sekarang ada halaman produk yang jelas, langsung bisa bayar QRIS. Lebih enak buat saya dan pembeli."</blockquote>
+            <div class="testi-author">
+              <div class="testi-avatar">A</div>
+              <div>
+                <div class="testi-name">Andi Pratama</div>
+                <div class="testi-role">UMKM Kuliner Rumahan</div>
+              </div>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div class="stars">★★★★★</div>
+            <blockquote>"Sebagai dropshipper, saya butuh yang bisa dipakai cepat. Setup-nya nggak ribet sama sekali, langsung bisa dipromosikan di TikTok. Orderan naik dalam seminggu pertama."</blockquote>
+            <div class="testi-author">
+              <div class="testi-avatar">F</div>
+              <div>
+                <div class="testi-name">Fajar Nugroho</div>
+                <div class="testi-role">Reseller &amp; Dropshipper</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta" style="background:var(--dark)">
+      <div class="wrap">
+        <div class="cta-box">
+          <h2>Siap jualan lebih rapi dan lebih cepat closing?</h2>
+          <p>Bikin halaman jualanmu dalam 5 menit. Gratis untuk mulai, tidak perlu kartu kredit.</p>
+          <div class="cta-btns">
+            <a href="#" class="btn btn-white">Mulai Gratis Sekarang →</a>
+            <a href="#" class="btn btn-ghost">Gabung Early Access</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="wrap">
+        <span class="section-label">FAQ</span>
+        <h2 class="section-title">Pertanyaan yang sering ditanya</h2>
+        <div class="faq-list">
+          <details>
+            <summary>Apakah saya harus paham coding atau teknis?</summary>
+            <p class="faq-ans">Tidak perlu. Platform ini dibuat khusus untuk seller non-teknis. Tidak ada coding, tidak ada setting domain yang rumit.</p>
+          </details>
+          <details>
+            <summary>Saya belum punya website, apakah bisa langsung pakai?</summary>
+            <p class="faq-ans">Bisa. Justru platform ini paling cocok untuk yang belum punya website. Kamu langsung dapat link halaman jualan yang siap dipakai.</p>
+          </details>
+          <details>
+            <summary>Apakah cocok untuk jualan lewat WhatsApp?</summary>
+            <p class="faq-ans">Sangat cocok. Alur utama platform ini memang dirancang supaya pembeli bisa langsung lanjut chat dan closing via WhatsApp.</p>
+          </details>
+          <details>
+            <summary>Bisa dipakai untuk seller Instagram dan TikTok?</summary>
+            <p class="faq-ans">Bisa. Tinggal pasang link di bio IG atau TikTok, atau bagikan langsung ke calon pembeli lewat DM atau story.</p>
+          </details>
+          <details>
+            <summary>Metode pembayaran apa yang didukung?</summary>
+            <p class="faq-ans">QRIS dan transfer bank lokal. Dua metode yang paling familiar dan mudah dipakai oleh buyer Indonesia.</p>
+          </details>
+          <details>
+            <summary>Berapa lama proses setup awalnya?</summary>
+            <p class="faq-ans">Rata-rata 5 menit. Isi nama toko, tambahkan produk, dan link jualanmu sudah siap dibagikan.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="wrap footer-inner">
+        <div class="footer-logo">TokoCepat</div>
+        <div class="footer-links">
+          <a href="#">Fitur</a>
+          <a href="#">Harga</a>
+          <a href="#">Kontak</a>
+          <a href="#">Privasi</a>
+        </div>
+        <div>© 2026 TokoCepat. Untuk Seller Indonesia.</div>
+      </div>
+    </footer>
+
+  </body>
+</html>
