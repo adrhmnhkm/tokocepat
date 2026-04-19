@@ -72,7 +72,7 @@ export default async function DashboardPage() {
             </p>
             <Link
               href="/dashboard/toko"
-              className="inline-flex items-center gap-2 bg-green-600 text-white font-semibold px-6 py-2.5 rounded-full shadow-[0_4px_12px_rgba(22,163,74,0.3)] hover:bg-green-700 transition-colors"
+              className="inline-flex items-center gap-2 bg-green-600 text-white font-semibold px-6 py-3 rounded-full shadow-[0_4px_12px_rgba(22,163,74,0.3)] hover:bg-green-700 transition-colors min-h-[44px]"
             >
               Buat Toko Sekarang →
             </Link>
@@ -111,20 +111,20 @@ export default async function DashboardPage() {
             <div className="flex flex-wrap gap-3">
               <Link
                 href="/dashboard/produk/tambah"
-                className="inline-flex items-center gap-2 bg-green-600 text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-green-700 transition-colors"
+                className="inline-flex items-center gap-2 bg-green-600 text-white text-sm font-semibold px-5 py-3 rounded-full hover:bg-green-700 transition-colors min-h-[44px]"
               >
                 + Tambah Produk
               </Link>
               <Link
                 href="/dashboard/toko"
-                className="inline-flex items-center gap-2 bg-white text-slate-700 text-sm font-semibold px-5 py-2.5 rounded-full border border-slate-200 hover:border-slate-400 transition-colors"
+                className="inline-flex items-center gap-2 bg-white text-slate-700 text-sm font-semibold px-5 py-3 rounded-full border border-slate-200 hover:border-slate-400 transition-colors min-h-[44px]"
               >
                 Edit Toko
               </Link>
               <Link
                 href={`/toko/${store.slug}`}
                 target="_blank"
-                className="inline-flex items-center gap-2 bg-white text-slate-700 text-sm font-semibold px-5 py-2.5 rounded-full border border-slate-200 hover:border-slate-400 transition-colors"
+                className="inline-flex items-center gap-2 bg-white text-slate-700 text-sm font-semibold px-5 py-3 rounded-full border border-slate-200 hover:border-slate-400 transition-colors min-h-[44px]"
               >
                 Lihat Halaman Toko ↗
               </Link>
@@ -143,7 +143,7 @@ export default async function DashboardPage() {
               </div>
               <Link
                 href="/dashboard/produk/tambah"
-                className="flex-shrink-0 text-xs font-semibold text-amber-800 border border-amber-300 bg-white px-3 py-1.5 rounded-lg hover:bg-amber-100 transition-colors whitespace-nowrap"
+                className="flex-shrink-0 text-xs font-semibold text-amber-800 border border-amber-300 bg-white px-3 py-2.5 rounded-lg hover:bg-amber-100 transition-colors whitespace-nowrap min-h-[40px] inline-flex items-center"
               >
                 + Tambah Produk
               </Link>

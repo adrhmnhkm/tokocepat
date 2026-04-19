@@ -35,7 +35,7 @@ export default function ProductList({ products }: { products: Product[] }) {
         </p>
         <Link
           href="/dashboard/produk/tambah"
-          className="inline-flex items-center gap-2 bg-green-600 text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-green-700 transition-colors"
+          className="inline-flex items-center gap-2 bg-green-600 text-white text-sm font-semibold px-5 py-3 rounded-full hover:bg-green-700 transition-colors min-h-[44px]"
         >
           + Tambah Produk Pertama
         </Link>
