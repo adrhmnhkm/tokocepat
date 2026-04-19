@@ -6,7 +6,10 @@ import { loginSchema, registerSchema } from "@/lib/validations";
 import bcrypt from "bcryptjs";
 import { AuthError } from "next-auth";
 
-export type ActionState = { error: string } | { success: string } | null;
+export type ActionState = {
+  error?: string;
+  success?: string;
+} | null;
 
 export async function registerUser(
   _prev: ActionState,
