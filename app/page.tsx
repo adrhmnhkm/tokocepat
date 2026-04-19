@@ -46,16 +46,16 @@ export default function LandingPage() {
               IG/TikTok/WhatsApp, dan terima pembayaran digital lokal. Tanpa
               coding, tanpa ribet.
             </p>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-col xs:flex-row flex-wrap gap-3">
               <Link
                 href="/daftar"
-                className="bg-green-600 text-white font-semibold px-6 py-3 rounded-full shadow-[0_4px_16px_rgba(22,163,74,0.3)] hover:bg-green-700 hover:-translate-y-px transition-all"
+                className="bg-green-600 text-white font-semibold px-6 py-3.5 rounded-full shadow-[0_4px_16px_rgba(22,163,74,0.3)] hover:bg-green-700 hover:-translate-y-px transition-all text-center"
               >
                 Mulai Gratis Sekarang →
               </Link>
               <Link
                 href="#solution"
-                className="bg-white text-slate-800 font-semibold px-6 py-3 rounded-full border border-slate-200 hover:border-slate-400 hover:-translate-y-px transition-all"
+                className="bg-white text-slate-800 font-semibold px-6 py-3.5 rounded-full border border-slate-200 hover:border-slate-400 hover:-translate-y-px transition-all text-center"
               >
                 Lihat Fitur
               </Link>
@@ -278,25 +278,25 @@ export default function LandingPage() {
       {/* ── CTA ── */}
       <section id="cta" className="py-20 bg-slate-950">
         <div className="w-[min(1100px,90%)] mx-auto">
-          <div className="bg-gradient-to-br from-green-700 to-green-900 rounded-3xl p-14 text-center shadow-[0_20px_60px_rgba(22,163,74,0.25)] relative overflow-hidden">
+          <div className="bg-gradient-to-br from-green-700 to-green-900 rounded-3xl p-8 sm:p-12 lg:p-14 text-center shadow-[0_20px_60px_rgba(22,163,74,0.25)] relative overflow-hidden">
             <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_50%_60%_at_80%_20%,rgba(255,255,255,0.08),transparent)]" />
-            <h2 className="text-[clamp(1.5rem,4vw,2.2rem)] font-extrabold text-white mb-3">
+            <h2 className="text-[clamp(1.3rem,4vw,2.2rem)] font-extrabold text-white mb-3">
               Siap jualan lebih rapi dan lebih cepat closing?
             </h2>
             <p className="text-green-200 text-base mb-7 max-w-md mx-auto">
               Bikin halaman jualanmu dalam 5 menit. Gratis untuk mulai, tidak
               perlu kartu kredit.
             </p>
-            <div className="flex justify-center flex-wrap gap-3">
+            <div className="flex flex-col sm:flex-row justify-center flex-wrap gap-3">
               <Link
                 href="/daftar"
-                className="bg-white text-green-800 font-bold px-7 py-3 rounded-full hover:bg-green-50 transition-colors"
+                className="bg-white text-green-800 font-bold px-7 py-3.5 rounded-full hover:bg-green-50 transition-colors"
               >
                 Mulai Gratis Sekarang →
               </Link>
               <Link
                 href="/masuk"
-                className="bg-white/10 text-white font-semibold px-7 py-3 rounded-full border border-white/25 hover:bg-white/20 transition-colors"
+                className="bg-white/10 text-white font-semibold px-7 py-3.5 rounded-full border border-white/25 hover:bg-white/20 transition-colors"
               >
                 Sudah punya akun? Masuk
               </Link>
@@ -335,18 +335,18 @@ export default function LandingPage() {
 
       {/* ── FOOTER ── */}
       <footer className="bg-slate-900 py-10 text-slate-400 text-sm">
-        <div className="w-[min(1100px,90%)] mx-auto flex flex-wrap justify-between items-center gap-4">
+        <div className="w-[min(1100px,90%)] mx-auto flex flex-col sm:flex-row flex-wrap justify-between items-center gap-4">
           <div className="font-bold text-slate-100 text-base">
             <span className="inline-flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-green-500" /> TokoCepat
             </span>
           </div>
-          <div className="flex gap-5">
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-5">
             {["Fitur", "Harga", "Kontak", "Privasi"].map((l) => (
-              <Link key={l} href="#" className="hover:text-slate-200 transition-colors">{l}</Link>
+              <Link key={l} href="#" className="hover:text-slate-200 transition-colors py-1">{l}</Link>
             ))}
           </div>
-          <div>© 2026 TokoCepat. Untuk Seller Indonesia.</div>
+          <div className="text-center sm:text-right">© 2026 TokoCepat. Untuk Seller Indonesia.</div>
         </div>
       </footer>
     </div>

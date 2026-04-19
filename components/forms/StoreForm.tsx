@@ -163,7 +163,7 @@ export default function StoreForm({ store }: Props) {
             )}
           </div>
         </div>
-        <p className="text-xs text-slate-400">
+        <p className="text-xs text-slate-400 break-all">
           Link toko:{" "}
           <span className="font-mono text-slate-600">
             {origin}/toko/{slug || "slug-toko"}

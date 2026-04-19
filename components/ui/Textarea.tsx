@@ -35,7 +35,7 @@ export default function Textarea({
         required={required}
         {...props}
         className={cn(
-          "w-full px-4 py-2.5 text-sm rounded-xl border bg-white resize-none transition-colors outline-none",
+          "w-full px-4 py-3 text-[16px] leading-snug rounded-xl border bg-white resize-none transition-colors outline-none",
           "focus:ring-2 focus:ring-green-500 focus:border-transparent",
           "placeholder:text-slate-400",
           error

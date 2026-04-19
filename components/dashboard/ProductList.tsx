@@ -49,10 +49,10 @@ export default function ProductList({ products }: { products: Product[] }) {
         {products.map((product) => (
           <div
             key={product.id}
-            className="bg-white border border-slate-200 rounded-2xl p-4 flex items-center gap-4 shadow-sm hover:shadow-md transition-shadow"
+            className="bg-white border border-slate-200 rounded-2xl p-4 flex items-center gap-3 shadow-sm hover:shadow-md transition-shadow"
           >
             {/* Thumbnail */}
-            <div className="w-16 h-16 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 relative">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 relative">
               {product.imageUrl ? (
                 <Image
                   src={product.imageUrl}
@@ -69,28 +69,28 @@ export default function ProductList({ products }: { products: Product[] }) {
 
             {/* Info */}
             <div className="flex-1 min-w-0">
-              <h3 className="font-bold text-slate-900 truncate">{product.name}</h3>
+              <h3 className="font-bold text-slate-900 truncate text-sm sm:text-base">{product.name}</h3>
               <p className="text-green-600 font-bold text-sm">
                 {formatRupiah(product.price)}
               </p>
               {product.description && (
-                <p className="text-xs text-slate-400 truncate mt-0.5">
+                <p className="text-xs text-slate-400 truncate mt-0.5 hidden sm:block">
                   {product.description}
                 </p>
               )}
             </div>
 
-            {/* Actions */}
+            {/* Actions — min 44px tap target */}
             <div className="flex items-center gap-2 flex-shrink-0">
               <Link
                 href={`/dashboard/produk/${product.id}/edit`}
-                className="px-3 py-1.5 text-xs font-semibold text-slate-600 border border-slate-200 rounded-full hover:border-slate-400 transition-colors"
+                className="inline-flex items-center justify-center min-h-[40px] px-3.5 text-xs font-semibold text-slate-600 border border-slate-200 rounded-full hover:border-slate-400 transition-colors"
               >
                 Edit
               </Link>
               <button
                 onClick={() => setConfirmId(product.id)}
-                className="px-3 py-1.5 text-xs font-semibold text-red-600 border border-red-200 rounded-full hover:bg-red-50 transition-colors"
+                className="inline-flex items-center justify-center min-h-[40px] px-3.5 text-xs font-semibold text-red-600 border border-red-200 rounded-full hover:bg-red-50 transition-colors"
               >
                 Hapus
               </button>

@@ -29,18 +29,18 @@ export default function ConfirmDialog({
       >
         <h3 className="font-bold text-slate-900 mb-2">{title}</h3>
         <p className="text-sm text-slate-500 mb-6">{message}</p>
-        <div className="flex gap-3 justify-end">
+        <div className="flex flex-col-reverse sm:flex-row gap-3 sm:justify-end">
           <button
             onClick={onCancel}
             disabled={loading}
-            className="px-5 py-2 text-sm font-semibold text-slate-600 border border-slate-200 rounded-full hover:border-slate-400 transition-colors disabled:opacity-50"
+            className="w-full sm:w-auto px-5 py-3 text-sm font-semibold text-slate-600 border border-slate-200 rounded-full hover:border-slate-400 transition-colors disabled:opacity-50"
           >
             Batal
           </button>
           <button
             onClick={onConfirm}
             disabled={loading}
-            className="px-5 py-2 text-sm font-semibold text-white bg-red-600 rounded-full hover:bg-red-700 transition-colors disabled:opacity-60"
+            className="w-full sm:w-auto px-5 py-3 text-sm font-semibold text-white bg-red-600 rounded-full hover:bg-red-700 transition-colors disabled:opacity-60"
           >
             {loading ? "Menghapus..." : confirmLabel}
           </button>

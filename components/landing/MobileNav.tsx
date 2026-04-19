@@ -8,10 +8,12 @@ export default function MobileNav() {
 
   return (
     <>
+      {/* Hamburger — min 44×44px tap target */}
       <button
         onClick={() => setOpen(!open)}
-        aria-label="Toggle menu"
-        className="flex flex-col gap-[5px] p-1 lg:hidden"
+        aria-label={open ? "Tutup menu" : "Buka menu"}
+        aria-expanded={open}
+        className="flex flex-col justify-center items-center gap-[5px] w-11 h-11 -mr-2 lg:hidden"
       >
         <span
           className={`block w-[22px] h-[2px] bg-slate-800 rounded transition-transform duration-300 ${
@@ -31,43 +33,40 @@ export default function MobileNav() {
       </button>
 
       {open && (
-        <div className="absolute top-16 left-0 right-0 bg-white border-b border-slate-200 px-6 py-4 flex flex-col gap-4 lg:hidden z-50 shadow-md">
-          <Link
-            href="#problem"
+        <>
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 top-16 z-40 bg-black/10 lg:hidden"
             onClick={() => setOpen(false)}
-            className="text-sm font-medium text-slate-600 hover:text-slate-900"
-          >
-            Masalah
-          </Link>
-          <Link
-            href="#solution"
-            onClick={() => setOpen(false)}
-            className="text-sm font-medium text-slate-600 hover:text-slate-900"
-          >
-            Fitur
-          </Link>
-          <Link
-            href="#steps"
-            onClick={() => setOpen(false)}
-            className="text-sm font-medium text-slate-600 hover:text-slate-900"
-          >
-            Cara Kerja
-          </Link>
-          <Link
-            href="#faq"
-            onClick={() => setOpen(false)}
-            className="text-sm font-medium text-slate-600 hover:text-slate-900"
-          >
-            FAQ
-          </Link>
-          <Link
-            href="/daftar"
-            onClick={() => setOpen(false)}
-            className="bg-green-600 text-white text-sm font-semibold px-4 py-2.5 rounded-full text-center hover:bg-green-700 transition-colors"
-          >
-            Mulai Gratis
-          </Link>
-        </div>
+          />
+          {/* Dropdown panel */}
+          <div className="absolute top-16 left-0 right-0 bg-white border-b border-slate-200 px-5 py-3 flex flex-col gap-1 lg:hidden z-50 shadow-lg">
+            {[
+              { href: "#problem", label: "Masalah" },
+              { href: "#solution", label: "Fitur" },
+              { href: "#steps", label: "Cara Kerja" },
+              { href: "#faq", label: "FAQ" },
+            ].map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                onClick={() => setOpen(false)}
+                className="flex items-center py-3 text-sm font-medium text-slate-600 hover:text-slate-900 border-b border-slate-100 last:border-0"
+              >
+                {label}
+              </Link>
+            ))}
+            <div className="pt-2 pb-1">
+              <Link
+                href="/daftar"
+                onClick={() => setOpen(false)}
+                className="block bg-green-600 text-white text-sm font-semibold px-4 py-3 rounded-full text-center hover:bg-green-700 transition-colors"
+              >
+                Mulai Gratis →
+              </Link>
+            </div>
+          </div>
+        </>
       )}
     </>
   );

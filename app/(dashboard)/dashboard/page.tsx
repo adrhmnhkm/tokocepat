@@ -32,8 +32,8 @@ export default async function DashboardPage() {
       {!store ? (
         /* ── Belum ada toko: onboarding 3 langkah ── */
         <div className="space-y-6 max-w-lg">
-          {/* Steps */}
-          <div className="grid grid-cols-3 gap-3">
+          {/* Steps — compact on small screens */}
+          <div className="grid grid-cols-3 gap-2 sm:gap-3">
             {[
               { step: "1", icon: "🏪", label: "Buat toko", active: true },
               { step: "2", icon: "📦", label: "Tambah produk", active: false },
@@ -41,21 +41,21 @@ export default async function DashboardPage() {
             ].map(({ step, icon, label, active }) => (
               <div
                 key={step}
-                className={`rounded-xl p-4 text-center border ${
+                className={`rounded-xl p-2.5 sm:p-4 text-center border ${
                   active
                     ? "bg-green-50 border-green-300"
                     : "bg-white border-slate-200 opacity-50"
                 }`}
               >
-                <div className="text-2xl mb-1">{icon}</div>
+                <div className="text-xl sm:text-2xl mb-1">{icon}</div>
                 <div
-                  className={`text-xs font-bold mb-0.5 ${
+                  className={`text-[10px] sm:text-xs font-bold mb-0.5 ${
                     active ? "text-green-700" : "text-slate-500"
                   }`}
                 >
-                  Langkah {step}
+                  {step}
                 </div>
-                <div className="text-xs text-slate-600">{label}</div>
+                <div className="text-[10px] sm:text-xs text-slate-600 leading-tight">{label}</div>
               </div>
             ))}
           </div>

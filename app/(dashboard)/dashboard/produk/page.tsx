@@ -28,10 +28,10 @@ export default async function ProdukPage() {
 
   return (
     <div className="p-6 lg:p-8 max-w-4xl">
-      <div className="flex items-center justify-between mb-8">
-        <div>
+      <div className="flex flex-wrap items-start justify-between gap-4 mb-8">
+        <div className="min-w-0">
           <h1 className="text-2xl font-extrabold text-slate-900">Produk</h1>
-          <p className="text-slate-500 mt-1">
+          <p className="text-slate-500 mt-1 text-sm truncate max-w-[240px] sm:max-w-none">
             {products.length === 0
               ? "Belum ada produk"
               : `${products.length} produk di toko ${store.name}`}
@@ -39,7 +39,7 @@ export default async function ProdukPage() {
         </div>
         <Link
           href="/dashboard/produk/tambah"
-          className="bg-green-600 text-white font-semibold px-5 py-2.5 rounded-full hover:bg-green-700 transition-colors text-sm"
+          className="flex-shrink-0 bg-green-600 text-white font-semibold px-5 py-3 rounded-full hover:bg-green-700 transition-colors text-sm"
         >
           + Tambah Produk
         </Link>
