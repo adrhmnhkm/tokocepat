@@ -6,13 +6,16 @@ export default auth((req) => {
   const { pathname } = req.nextUrl;
 
   const isDashboard = pathname.startsWith("/dashboard");
+  const isOnboarding = pathname.startsWith("/onboarding");
   const isAuthPage =
     pathname.startsWith("/masuk") || pathname.startsWith("/daftar");
 
-  if (isDashboard && !isLoggedIn) {
+  // Protect dashboard and onboarding — require login
+  if ((isDashboard || isOnboarding) && !isLoggedIn) {
     return NextResponse.redirect(new URL("/masuk", req.url));
   }
 
+  // Redirect logged-in users away from auth pages
   if (isAuthPage && isLoggedIn) {
     return NextResponse.redirect(new URL("/dashboard", req.url));
   }

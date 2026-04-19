@@ -49,12 +49,17 @@ export async function loginUser(
     return { error: result.error.errors[0].message };
   }
 
+  const { email, password } = result.data;
+
+  // Pre-check store so we can redirect directly — skips the dashboard → onboarding double redirect
+  const user = await prisma.user.findUnique({ where: { email } });
+  const hasStore = user
+    ? !!(await prisma.store.findUnique({ where: { userId: user.id } }))
+    : false;
+  const redirectTo = hasStore ? "/dashboard" : "/onboarding";
+
   try {
-    await signIn("credentials", {
-      email: result.data.email,
-      password: result.data.password,
-      redirectTo: "/dashboard",
-    });
+    await signIn("credentials", { email, password, redirectTo });
   } catch (error) {
     if (error instanceof AuthError) {
       return { error: "Email atau password salah." };

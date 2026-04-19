@@ -9,6 +9,9 @@ type Props = {
 };
 
 export default function WhatsAppButton({ phone, productName, price }: Props) {
+  // Jangan tampilkan tombol jika nomor WA belum diisi pemilik toko
+  if (!phone) return null;
+
   return (
     <a
       href={buildWAUrl(phone, productName, price)}

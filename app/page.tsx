@@ -37,14 +37,12 @@ export default function LandingPage() {
               Khusus Seller Indonesia
             </div>
             <h1 className="text-[clamp(1.875rem,5vw,3rem)] font-extrabold leading-tight text-slate-900 mb-5">
-              Jualan Online{" "}
-              <span className="text-green-600">Lebih Cepat</span>,{" "}
-              Closing Lewat WhatsApp
+              Jualan <span className="text-green-600">di WA</span>{" "}
+              <span>tanpa kirim</span>{" "}
+              katalog berulang
             </h1>
             <p className="text-slate-600 text-base sm:text-lg leading-relaxed mb-7 max-w-lg">
-              Bikin halaman jualan dalam 5 menit, bagikan satu link ke
-              IG/TikTok/WhatsApp, dan terima order langsung via WhatsApp. Tanpa
-              coding, tanpa ribet.
+            Cukup isi produk, bagikan link, dan biarkan pembeli lihat sendiri tanpa chat bolak-balik
             </p>
             <div className="flex flex-col xs:flex-row flex-wrap gap-3">
               <Link

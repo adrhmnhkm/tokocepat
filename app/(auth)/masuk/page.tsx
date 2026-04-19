@@ -11,9 +11,13 @@ export default function MasukPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
+      {/* Subtle overlay saat redirecting — mencegah double submit */}
+      {pending && (
+        <div className="fixed inset-0 z-50 bg-white/60 backdrop-blur-[2px] animate-fade-in" />
+      )}
       <div className="w-full max-w-sm">
         {/* Logo */}
-        <div className="text-center mb-6">
+        <div className="text-center mb-6 animate-enter">
           <Link
             href="/"
             className="inline-flex items-center gap-2 text-base font-semibold text-slate-900"
@@ -35,7 +39,7 @@ export default function MasukPage() {
           </p>
         </div>
 
-        <div className="bg-white rounded-xl border border-slate-200 p-6">
+        <div className="bg-white rounded-xl border border-slate-200 p-6 animate-enter-delayed">
           {state?.error && (
             <div className="mb-5 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-600">
               {state.error}

@@ -1,5 +1,6 @@
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { redirect } from "next/navigation";
 import Link from "next/link";
 import AnalyticsTracker from "@/components/dashboard/AnalyticsTracker";
 
@@ -12,6 +13,9 @@ export default async function DashboardPage() {
     where: { userId },
     include: { _count: { select: { products: true } } },
   });
+
+  // User baru tanpa toko → onboarding flow
+  if (!store) redirect("/onboarding");
 
   const firstName = session?.user?.name?.split(" ")[0] ?? "Seller";
 
@@ -29,122 +33,76 @@ export default async function DashboardPage() {
         </p>
       </div>
 
-      {!store ? (
-        /* ── Belum ada toko: onboarding ── */
-        <div className="max-w-md space-y-5">
-          {/* Progress steps — 3 langkah */}
-          <div className="grid grid-cols-3 gap-2 sm:gap-3">
-            {[
-              { step: "1", label: "Buat toko", active: true },
-              { step: "2", label: "Tambah produk", active: false },
-              { step: "3", label: "Bagikan link", active: false },
-            ].map(({ step, label, active }) => (
-              <div
-                key={step}
-                className={`rounded-lg p-2.5 sm:p-3.5 text-center border ${
-                  active
-                    ? "bg-green-50 border-green-200"
-                    : "bg-white border-slate-100 opacity-40"
-                }`}
-              >
-                <div
-                  className={`text-[10px] sm:text-xs font-semibold mb-0.5 ${
-                    active ? "text-green-700" : "text-slate-400"
-                  }`}
-                >
-                  Langkah {step}
-                </div>
-                <div className="text-[10px] sm:text-xs text-slate-600 leading-tight font-medium">{label}</div>
-              </div>
-            ))}
-          </div>
+      {/* ── Sudah ada toko ── */}
+      <div className="space-y-5">
+        {/* Stats */}
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
+          <StatCard
+            label="Nama Toko"
+            value={store.name}
+            sub="Toko aktif"
+          />
+          <StatCard
+            label="Total Produk"
+            value={store._count.products.toString()}
+            sub={store._count.products === 0 ? "Belum ada produk" : "produk"}
+          />
+          <StatCard
+            label="Link Toko"
+            value="Buka toko ↗"
+            href={`/toko/${store.slug}`}
+            sub={`/toko/${store.slug}`}
+            linkTarget="_blank"
+          />
+        </div>
 
-          {/* CTA card */}
-          <div className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8">
-            <h2 className="text-base font-semibold text-slate-900 mb-1.5">
-              Buat toko pertamamu
-            </h2>
-            <p className="text-slate-500 text-sm leading-relaxed mb-6">
-              Isi nama toko, slug URL, dan nomor WhatsApp. Selesai dalam 2 menit — tidak perlu keahlian teknis.
-            </p>
+        {/* Quick actions */}
+        <div className="bg-white border border-slate-200 rounded-xl p-5">
+          <h2 className="text-sm font-semibold text-slate-500 mb-3 uppercase tracking-wide">
+            Aksi Cepat
+          </h2>
+          <div className="flex flex-wrap gap-3">
             <Link
-              href="/dashboard/toko"
+              href="/dashboard/produk/tambah"
               className="inline-flex items-center gap-2 bg-green-600 text-white text-sm font-semibold px-5 py-3 rounded-lg hover:bg-green-700 transition-colors min-h-[44px]"
             >
-              Buat Toko Sekarang →
+              + Tambah Produk
+            </Link>
+            <Link
+              href="/dashboard/toko"
+              className="inline-flex items-center gap-2 bg-white text-slate-700 text-sm font-semibold px-5 py-3 rounded-lg border border-slate-200 hover:border-slate-300 transition-colors min-h-[44px]"
+            >
+              Edit Toko
+            </Link>
+            <Link
+              href={`/toko/${store.slug}`}
+              target="_blank"
+              className="inline-flex items-center gap-2 bg-white text-slate-700 text-sm font-semibold px-5 py-3 rounded-lg border border-slate-200 hover:border-slate-300 transition-colors min-h-[44px]"
+            >
+              Lihat Toko ↗
             </Link>
           </div>
         </div>
-      ) : (
-        /* ── Sudah ada toko ── */
-        <div className="space-y-5">
-          {/* Stats */}
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
-            <StatCard
-              label="Nama Toko"
-              value={store.name}
-              sub="Toko aktif"
-            />
-            <StatCard
-              label="Total Produk"
-              value={store._count.products.toString()}
-              sub={store._count.products === 0 ? "Belum ada produk" : "produk"}
-            />
-            <StatCard
-              label="Link Toko"
-              value="Buka toko ↗"
-              href={`/toko/${store.slug}`}
-              sub={`/toko/${store.slug}`}
-              linkTarget="_blank"
-            />
-          </div>
 
-          {/* Quick actions */}
-          <div className="bg-white border border-slate-200 rounded-xl p-5">
-            <h2 className="text-sm font-semibold text-slate-500 mb-3 uppercase tracking-wide">Aksi Cepat</h2>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="/dashboard/produk/tambah"
-                className="inline-flex items-center gap-2 bg-green-600 text-white text-sm font-semibold px-5 py-3 rounded-full hover:bg-green-700 transition-colors min-h-[44px]"
-              >
-                + Tambah Produk
-              </Link>
-              <Link
-                href="/dashboard/toko"
-                className="inline-flex items-center gap-2 bg-white text-slate-700 text-sm font-semibold px-5 py-3 rounded-full border border-slate-200 hover:border-slate-400 transition-colors min-h-[44px]"
-              >
-                Edit Toko
-              </Link>
-              <Link
-                href={`/toko/${store.slug}`}
-                target="_blank"
-                className="inline-flex items-center gap-2 bg-white text-slate-700 text-sm font-semibold px-5 py-3 rounded-full border border-slate-200 hover:border-slate-400 transition-colors min-h-[44px]"
-              >
-                Lihat Halaman Toko ↗
-              </Link>
+        {store._count.products === 0 && (
+          <div className="border border-amber-200 bg-amber-50 rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center gap-4">
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-semibold text-amber-900 mb-0.5">
+                Tokomu masih kosong
+              </p>
+              <p className="text-sm text-amber-700 leading-relaxed">
+                Pembeli tidak bisa memesan jika belum ada produk. Tambahkan produk pertamamu sekarang.
+              </p>
             </div>
+            <Link
+              href="/dashboard/produk/tambah"
+              className="flex-shrink-0 text-sm font-semibold text-amber-900 border border-amber-300 bg-white px-4 py-2.5 rounded-lg hover:bg-amber-100 transition-colors min-h-[44px] inline-flex items-center justify-center"
+            >
+              Tambah Produk
+            </Link>
           </div>
-
-          {store._count.products === 0 && (
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3">
-              <span className="text-xl flex-shrink-0">📦</span>
-              <div className="flex-1 text-sm text-amber-800">
-                <p className="font-semibold mb-0.5">Belum ada produk di tokomu</p>
-                <p className="text-amber-700">
-                  Pembeli tidak bisa order jika toko kosong. Tambahkan produk
-                  pertamamu sekarang — hanya butuh 1 menit.
-                </p>
-              </div>
-              <Link
-                href="/dashboard/produk/tambah"
-                className="flex-shrink-0 text-xs font-semibold text-amber-800 border border-amber-300 bg-white px-3 py-2.5 rounded-lg hover:bg-amber-100 transition-colors whitespace-nowrap min-h-[40px] inline-flex items-center"
-              >
-                + Tambah Produk
-              </Link>
-            </div>
-          )}
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
