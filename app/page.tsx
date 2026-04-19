@@ -10,7 +10,7 @@ export default function LandingPage() {
         <div className="w-[min(1100px,90%)] mx-auto flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-2 text-lg font-bold text-slate-900">
             <span className="w-2.5 h-2.5 rounded-full bg-green-600" />
-            TokoCepat
+            KirimLink
           </Link>
           <ul className="hidden lg:flex items-center gap-7 list-none">
             <li><Link href="#problem" className="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">Masalah</Link></li>
@@ -67,7 +67,7 @@ export default function LandingPage() {
               <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
               <span className="w-2.5 h-2.5 rounded-full bg-green-400" />
               <div className="flex-1 bg-slate-200 rounded ml-2 h-5 flex items-center px-2.5 text-[11px] text-slate-400">
-                tokocepat.id/toko-rani
+                kirimlink.id/toko-rani
               </div>
             </div>
             <div className="p-5">
