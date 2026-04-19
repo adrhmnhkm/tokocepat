@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Sidebar from "@/components/dashboard/Sidebar";
+import FeedbackWidget from "@/components/dashboard/FeedbackWidget";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -56,6 +57,8 @@ export default function DashboardShell({ user, children }: Props) {
 
         <main className="flex-1">{children}</main>
       </div>
+
+      <FeedbackWidget />
     </div>
   );
 }

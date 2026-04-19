@@ -9,9 +9,10 @@ export async function POST(req: NextRequest) {
   }
 
   const configured =
-    process.env.CLOUDINARY_CLOUD_NAME &&
-    process.env.CLOUDINARY_API_KEY &&
-    process.env.CLOUDINARY_API_SECRET;
+    process.env.CLOUDINARY_URL ||
+    (process.env.CLOUDINARY_CLOUD_NAME &&
+      process.env.CLOUDINARY_API_KEY &&
+      process.env.CLOUDINARY_API_SECRET);
 
   if (!configured) {
     return NextResponse.json(

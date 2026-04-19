@@ -7,6 +7,8 @@ import Input from "@/components/ui/Input";
 import Textarea from "@/components/ui/Textarea";
 import Button from "@/components/ui/Button";
 import { toast } from "sonner";
+import Link from "next/link";
+import { track } from "@/lib/analytics";
 import type { Store } from "@prisma/client";
 
 type Props = { store?: Store | null };
@@ -14,10 +16,13 @@ type Props = { store?: Store | null };
 type SlugStatus = "idle" | "checking" | "available" | "taken";
 
 export default function StoreForm({ store }: Props) {
+  const isNew = !store;
   const [state, action, pending] = useActionState<StoreActionState, FormData>(
     upsertStore,
     null
   );
+  const [justCreated, setJustCreated] = useState(false);
+  const [createdSlug, setCreatedSlug] = useState("");
 
   const [name, setName] = useState(store?.name ?? "");
   const [slug, setSlug] = useState(store?.slug ?? "");
@@ -51,12 +56,17 @@ export default function StoreForm({ store }: Props) {
     return () => clearTimeout(t);
   }, [slug, store?.id]);
 
-  // Toast on success
+  // Toast on success + panel celebratory untuk toko baru
   useEffect(() => {
     if (state && "success" in state) {
       toast.success(state.success);
+      if (isNew) {
+        track("create_store_success");
+        setCreatedSlug(slug);
+        setJustCreated(true);
+      }
     }
-  }, [state]);
+  }, [state, isNew, slug]);
 
   const displayWA = store?.whatsapp?.startsWith("62")
     ? "0" + store.whatsapp.slice(2)
@@ -65,8 +75,51 @@ export default function StoreForm({ store }: Props) {
   const origin =
     typeof window !== "undefined" ? window.location.origin : "http://localhost:3000";
 
+  if (justCreated) {
+    return (
+      <div className="text-center py-4 space-y-5">
+        <div className="text-6xl">🎉</div>
+        <div>
+          <h2 className="text-xl font-extrabold text-slate-900 mb-1">
+            Toko berhasil dibuat!
+          </h2>
+          <p className="text-slate-500 text-sm">
+            Sekarang tambahkan produk agar pembeli bisa langsung order.
+          </p>
+        </div>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Link
+            href="/dashboard/produk/tambah"
+            className="inline-flex items-center justify-center gap-2 bg-green-600 text-white font-semibold px-6 py-2.5 rounded-full shadow-[0_4px_12px_rgba(22,163,74,0.3)] hover:bg-green-700 transition-colors"
+          >
+            + Tambah Produk Pertama
+          </Link>
+          <Link
+            href={`/toko/${createdSlug}`}
+            target="_blank"
+            className="inline-flex items-center justify-center gap-2 bg-white text-slate-700 font-semibold px-6 py-2.5 rounded-full border border-slate-200 hover:border-slate-400 transition-colors"
+          >
+            Lihat Toko ↗
+          </Link>
+        </div>
+        <button
+          onClick={() => setJustCreated(false)}
+          className="text-xs text-slate-400 hover:text-slate-600 underline"
+        >
+          Edit toko lagi
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <form action={action} className="space-y-5">
+    <form
+      action={(formData) => {
+        track("create_store_attempt");
+        action(formData);
+      }}
+      className="space-y-5"
+    >
       {state && "error" in state && (
         <div className="p-3.5 bg-red-50 border border-red-200 rounded-xl text-sm text-red-600">
           {state.error}
