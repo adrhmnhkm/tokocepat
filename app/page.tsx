@@ -305,6 +305,7 @@ export default function LandingPage() {
               >
                 Sudah punya akun? Masuk
               </Link>
+            </div>
           </div>
         </div>
       </section>
