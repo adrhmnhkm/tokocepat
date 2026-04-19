@@ -6,7 +6,7 @@ import { loginSchema, registerSchema } from "@/lib/validations";
 import bcrypt from "bcryptjs";
 import { AuthError } from "next-auth";
 
-export type ActionState = { error: string } | null;
+export type ActionState = { error: string } | { success: string } | null;
 
 export async function registerUser(
   _prev: ActionState,
@@ -27,18 +27,12 @@ export async function registerUser(
   }
 
   const hashed = await bcrypt.hash(password, 12);
-  await prisma.user.create({ data: { name, email, password: hashed } });
 
-  try {
-    await signIn("credentials", { email, password, redirectTo: "/dashboard" });
-  } catch (error) {
-    if (error instanceof AuthError) {
-      return { error: "Akun berhasil dibuat. Silakan masuk." };
-    }
-    throw error;
-  }
+    await prisma.user.create({
+    data: { name, email, password: hashed },
+  });
 
-  return null;
+  return { success: "Akun berhasil dibuat. Silakan masuk." };
 }
 
 export async function loginUser(
