@@ -20,59 +20,56 @@ export default async function DashboardPage() {
       <AnalyticsTracker event="dashboard_view" />
 
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-2xl font-extrabold text-slate-900">
-          Halo, {firstName} 👋
+      <div className="mb-8 pb-6 border-b border-slate-100">
+        <h1 className="text-xl font-bold text-slate-900">
+          Halo, {firstName}
         </h1>
-        <p className="text-slate-500 mt-1">
-          Selamat datang di dashboard TokoCepat.
+        <p className="text-sm text-slate-500 mt-0.5">
+          Selamat datang kembali di TokoCepat.
         </p>
       </div>
 
       {!store ? (
-        /* ── Belum ada toko: onboarding 3 langkah ── */
-        <div className="space-y-6 max-w-lg">
-          {/* Steps — compact on small screens */}
+        /* ── Belum ada toko: onboarding ── */
+        <div className="max-w-md space-y-5">
+          {/* Progress steps — 3 langkah */}
           <div className="grid grid-cols-3 gap-2 sm:gap-3">
             {[
-              { step: "1", icon: "🏪", label: "Buat toko", active: true },
-              { step: "2", icon: "📦", label: "Tambah produk", active: false },
-              { step: "3", icon: "🔗", label: "Bagikan link", active: false },
-            ].map(({ step, icon, label, active }) => (
+              { step: "1", label: "Buat toko", active: true },
+              { step: "2", label: "Tambah produk", active: false },
+              { step: "3", label: "Bagikan link", active: false },
+            ].map(({ step, label, active }) => (
               <div
                 key={step}
-                className={`rounded-xl p-2.5 sm:p-4 text-center border ${
+                className={`rounded-lg p-2.5 sm:p-3.5 text-center border ${
                   active
-                    ? "bg-green-50 border-green-300"
-                    : "bg-white border-slate-200 opacity-50"
+                    ? "bg-green-50 border-green-200"
+                    : "bg-white border-slate-100 opacity-40"
                 }`}
               >
-                <div className="text-xl sm:text-2xl mb-1">{icon}</div>
                 <div
-                  className={`text-[10px] sm:text-xs font-bold mb-0.5 ${
-                    active ? "text-green-700" : "text-slate-500"
+                  className={`text-[10px] sm:text-xs font-semibold mb-0.5 ${
+                    active ? "text-green-700" : "text-slate-400"
                   }`}
                 >
-                  {step}
+                  Langkah {step}
                 </div>
-                <div className="text-[10px] sm:text-xs text-slate-600 leading-tight">{label}</div>
+                <div className="text-[10px] sm:text-xs text-slate-600 leading-tight font-medium">{label}</div>
               </div>
             ))}
           </div>
 
           {/* CTA card */}
-          <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-8 text-center">
-            <div className="text-5xl mb-4">🏪</div>
-            <h2 className="text-lg font-bold text-slate-900 mb-2">
-              Mulai dengan membuat toko kamu
+          <div className="bg-white border border-slate-200 rounded-xl p-6 sm:p-8">
+            <h2 className="text-base font-semibold text-slate-900 mb-1.5">
+              Buat toko pertamamu
             </h2>
-            <p className="text-slate-500 text-sm mb-6">
-              Isi nama toko, slug URL, dan nomor WhatsApp. Selesai dalam 2 menit.
-              Tidak perlu keahlian teknis.
+            <p className="text-slate-500 text-sm leading-relaxed mb-6">
+              Isi nama toko, slug URL, dan nomor WhatsApp. Selesai dalam 2 menit — tidak perlu keahlian teknis.
             </p>
             <Link
               href="/dashboard/toko"
-              className="inline-flex items-center gap-2 bg-green-600 text-white font-semibold px-6 py-3 rounded-full shadow-[0_4px_12px_rgba(22,163,74,0.3)] hover:bg-green-700 transition-colors min-h-[44px]"
+              className="inline-flex items-center gap-2 bg-green-600 text-white text-sm font-semibold px-5 py-3 rounded-lg hover:bg-green-700 transition-colors min-h-[44px]"
             >
               Buat Toko Sekarang →
             </Link>
@@ -80,25 +77,22 @@ export default async function DashboardPage() {
         </div>
       ) : (
         /* ── Sudah ada toko ── */
-        <div className="space-y-6">
+        <div className="space-y-5">
           {/* Stats */}
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
             <StatCard
-              icon="🏪"
               label="Nama Toko"
               value={store.name}
               sub="Toko aktif"
             />
             <StatCard
-              icon="📦"
               label="Total Produk"
               value={store._count.products.toString()}
-              sub={store._count.products === 0 ? "Belum ada produk" : "produk aktif"}
+              sub={store._count.products === 0 ? "Belum ada produk" : "produk"}
             />
             <StatCard
-              icon="🔗"
               label="Link Toko"
-              value="Lihat →"
+              value="Buka toko ↗"
               href={`/toko/${store.slug}`}
               sub={`/toko/${store.slug}`}
               linkTarget="_blank"
@@ -106,8 +100,8 @@ export default async function DashboardPage() {
           </div>
 
           {/* Quick actions */}
-          <div className="bg-white border border-slate-200 rounded-2xl p-6">
-            <h2 className="font-bold text-slate-900 mb-4">Aksi Cepat</h2>
+          <div className="bg-white border border-slate-200 rounded-xl p-5">
+            <h2 className="text-sm font-semibold text-slate-500 mb-3 uppercase tracking-wide">Aksi Cepat</h2>
             <div className="flex flex-wrap gap-3">
               <Link
                 href="/dashboard/produk/tambah"
@@ -156,14 +150,12 @@ export default async function DashboardPage() {
 }
 
 function StatCard({
-  icon,
   label,
   value,
   sub,
   href,
   linkTarget,
 }: {
-  icon: string;
   label: string;
   value: string;
   sub: string;
@@ -171,23 +163,22 @@ function StatCard({
   linkTarget?: string;
 }) {
   return (
-    <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-      <div className="text-2xl mb-2">{icon}</div>
-      <div className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-1">
+    <div className="bg-white border border-slate-100 rounded-xl p-4 sm:p-5">
+      <p className="text-[11px] font-medium text-slate-400 uppercase tracking-wider mb-2">
         {label}
-      </div>
+      </p>
       {href ? (
         <Link
           href={href}
           target={linkTarget}
-          className="text-base font-bold text-green-600 hover:underline"
+          className="block text-sm font-semibold text-green-600 hover:text-green-700 truncate"
         >
           {value}
         </Link>
       ) : (
-        <div className="text-base font-bold text-slate-900 truncate">{value}</div>
+        <p className="text-sm font-semibold text-slate-900 truncate">{value}</p>
       )}
-      <div className="text-xs text-slate-400 mt-0.5 truncate">{sub}</div>
+      <p className="text-xs text-slate-400 mt-1 truncate">{sub}</p>
     </div>
   );
 }

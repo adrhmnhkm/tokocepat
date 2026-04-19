@@ -13,31 +13,31 @@ export default function MasukPage() {
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
       <div className="w-full max-w-sm">
         {/* Logo */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-6">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xl font-bold text-slate-900"
+            className="inline-flex items-center gap-2 text-base font-semibold text-slate-900"
           >
-            <span className="w-2.5 h-2.5 rounded-full bg-green-600" />
+            <span className="w-2 h-2 rounded-full bg-green-600" />
             TokoCepat
           </Link>
-          <h1 className="mt-5 text-2xl font-extrabold text-slate-900">
+          <h1 className="mt-4 text-xl font-bold text-slate-900">
             Masuk ke akun kamu
           </h1>
-          <p className="mt-1.5 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-slate-500">
             Belum punya akun?{" "}
             <Link
               href="/daftar"
-              className="text-green-600 font-semibold hover:underline"
+              className="text-green-600 font-medium hover:underline"
             >
               Daftar sekarang
             </Link>
           </p>
         </div>
 
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-7">
+        <div className="bg-white rounded-xl border border-slate-200 p-6">
           {state?.error && (
-            <div className="mb-5 p-3.5 bg-red-50 border border-red-200 rounded-xl text-sm text-red-600">
+            <div className="mb-5 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-600">
               {state.error}
             </div>
           )}
@@ -70,12 +70,12 @@ export default function MasukPage() {
           </form>
         </div>
 
-        <p className="text-center mt-6 text-xs text-slate-400">
+        <p className="text-center mt-5 text-xs text-slate-400">
           Dengan masuk, kamu setuju dengan{" "}
           <Link href="#" className="underline hover:text-slate-600">
             Syarat & Ketentuan
-          </Link>{" "}
-          kami.
+          </Link>
+          .
         </p>
       </div>
     </div>

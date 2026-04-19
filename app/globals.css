@@ -6,11 +6,42 @@
   * {
     box-sizing: border-box;
   }
-  body {
-    @apply antialiased text-slate-900;
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
-  h1, h2, h3, h4, h5, h6 {
+
+  body {
+    @apply antialiased text-slate-900 font-sans;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply tracking-tight;
+    text-wrap: balance;
+  }
+
+  /* Refined selection color */
+  ::selection {
+    @apply bg-green-100 text-green-900;
+  }
+
+  /* Focus visible — override default browser outline */
+  :focus-visible {
+    outline: 2px solid theme("colors.green.500");
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Remove focus ring when not keyboard navigating */
+  :focus:not(:focus-visible) {
+    outline: none;
   }
 }
 

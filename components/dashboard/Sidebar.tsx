@@ -6,9 +6,9 @@ import { signOut } from "next-auth/react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { href: "/dashboard", label: "Dashboard", icon: "🏠" },
-  { href: "/dashboard/toko", label: "Toko Saya", icon: "🏪" },
-  { href: "/dashboard/produk", label: "Produk", icon: "📦" },
+  { href: "/dashboard", label: "Dashboard" },
+  { href: "/dashboard/toko", label: "Toko Saya" },
+  { href: "/dashboard/produk", label: "Produk" },
 ];
 
 type Props = {
@@ -32,7 +32,7 @@ export default function Sidebar({ user }: Props) {
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 p-4 space-y-1">
+      <nav className="flex-1 px-3 py-4 space-y-0.5">
         {navItems.map((item) => {
           const isActive =
             item.href === "/dashboard"
@@ -44,13 +44,18 @@ export default function Sidebar({ user }: Props) {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors",
+                "flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm transition-colors",
                 isActive
-                  ? "bg-green-600 text-white"
-                  : "text-slate-400 hover:text-white hover:bg-slate-800"
+                  ? "bg-white/[0.08] text-white font-medium"
+                  : "text-slate-400 hover:text-slate-100 hover:bg-white/[0.04] font-normal"
               )}
             >
-              <span>{item.icon}</span>
+              {isActive && (
+                <span className="w-1 h-1 rounded-full bg-green-400 flex-shrink-0" />
+              )}
+              {!isActive && (
+                <span className="w-1 h-1 rounded-full bg-transparent flex-shrink-0" />
+              )}
               {item.label}
             </Link>
           );
@@ -58,23 +63,23 @@ export default function Sidebar({ user }: Props) {
       </nav>
 
       {/* User info */}
-      <div className="p-4 border-t border-slate-800">
-        <div className="flex items-center gap-3 mb-3">
-          <div className="w-9 h-9 rounded-full bg-green-600 grid place-items-center text-white text-sm font-bold flex-shrink-0">
+      <div className="px-3 py-4 border-t border-slate-800">
+        <div className="flex items-center gap-3 mb-3 px-1">
+          <div className="w-8 h-8 rounded-lg bg-slate-700 grid place-items-center text-white text-xs font-semibold flex-shrink-0">
             {user.name?.[0]?.toUpperCase() ?? "U"}
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-semibold text-white truncate">
+            <p className="text-sm font-medium text-slate-200 truncate">
               {user.name}
             </p>
-            <p className="text-xs text-slate-400 truncate">{user.email}</p>
+            <p className="text-xs text-slate-500 truncate">{user.email}</p>
           </div>
         </div>
         <button
           onClick={() => signOut({ callbackUrl: "/masuk" })}
-          className="w-full text-left text-xs text-slate-400 hover:text-red-400 transition-colors px-1 py-1"
+          className="w-full text-left text-xs text-slate-500 hover:text-slate-300 transition-colors px-1 py-1.5"
         >
-          Keluar dari akun →
+          Keluar
         </button>
       </div>
     </aside>
