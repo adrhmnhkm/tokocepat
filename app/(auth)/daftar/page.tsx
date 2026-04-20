@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { registerUser } from "@/actions/auth";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
+import Logo from "@/components/ui/Logo";
 import { track } from "@/lib/analytics";
 
 export default function DaftarPage() {
@@ -63,13 +64,9 @@ export default function DaftarPage() {
       <div className="w-full max-w-sm">
         {/* Logo */}
         <div className="text-center mb-6">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-base font-semibold text-slate-900"
-          >
-            <span className="w-2 h-2 rounded-full bg-green-600" />
-            KirimLink
-          </Link>
+          <div className="flex justify-center mb-1">
+            <Logo size="md" />
+          </div>
           <h1 className="mt-4 text-xl font-bold text-slate-900">
             Buat akun gratis
           </h1>

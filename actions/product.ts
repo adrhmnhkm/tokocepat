@@ -6,7 +6,10 @@ import { productSchema } from "@/lib/validations";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export type ProductActionState = { error: string } | null;
+export type ProductActionState =
+  | { error: string }
+  | { success: { storeSlug: string; storeName: string } }
+  | null;
 
 async function getStoreForUser(userId: string) {
   return prisma.store.findUnique({ where: { userId } });
@@ -37,20 +40,22 @@ export async function saveProduct(
   const id = formData.get("id") as string | null;
 
   if (id) {
-    // Update — verifikasi ownership
+    // Update — verifikasi ownership, lalu redirect ke list
     const product = await prisma.product.findUnique({ where: { id } });
     if (!product || product.storeId !== store.id) {
       return { error: "Produk tidak ditemukan." };
     }
     await prisma.product.update({ where: { id }, data });
+    revalidatePath("/dashboard/produk");
+    revalidatePath(`/${store.slug}`);
+    redirect("/dashboard/produk");
   } else {
-    // Create
+    // Create — return success state biar form bisa tampilkan share CTA
     await prisma.product.create({ data: { ...data, storeId: store.id } });
+    revalidatePath("/dashboard/produk");
+    revalidatePath(`/${store.slug}`);
+    return { success: { storeSlug: store.slug, storeName: store.name } };
   }
-
-  revalidatePath("/dashboard/produk");
-  revalidatePath(`/${store.slug}`);
-  redirect("/dashboard/produk");
 }
 
 export async function deleteProduct(id: string): Promise<ProductActionState> {

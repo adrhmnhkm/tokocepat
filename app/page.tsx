@@ -1,5 +1,6 @@
 import Link from "next/link";
 import MobileNav from "@/components/landing/MobileNav";
+import Logo from "@/components/ui/Logo";
 
 export default function LandingPage() {
   return (
@@ -8,10 +9,7 @@ export default function LandingPage() {
       {/* ── NAVBAR ── */}
       <nav className="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-slate-200">
         <div className="w-[min(1100px,90%)] mx-auto flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2 text-lg font-bold text-slate-900">
-            <span className="w-2.5 h-2.5 rounded-full bg-green-600" />
-            KirimLink
-          </Link>
+          <Logo size="md" />
           <ul className="hidden lg:flex items-center gap-7 list-none">
             <li><Link href="#problem" className="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">Masalah</Link></li>
             <li><Link href="#solution" className="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">Fitur</Link></li>
@@ -339,17 +337,13 @@ export default function LandingPage() {
       {/* ── FOOTER ── */}
       <footer className="bg-slate-900 py-10 text-slate-400 text-sm">
         <div className="w-[min(1100px,90%)] mx-auto flex flex-col sm:flex-row flex-wrap justify-between items-center gap-4">
-          <div className="font-bold text-slate-100 text-base">
-            <span className="inline-flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-green-500" /> TokoCepat
-            </span>
-          </div>
+          <Logo size="sm" />
           <div className="flex flex-wrap justify-center gap-4 sm:gap-5">
             {["Fitur", "Harga", "Kontak", "Privasi"].map((l) => (
               <Link key={l} href="#" className="hover:text-slate-200 transition-colors py-1">{l}</Link>
             ))}
           </div>
-          <div className="text-center sm:text-right">© 2026 TokoCepat. Untuk Seller Indonesia.</div>
+          <div className="text-center sm:text-right">© 2026 KirimLink.id. Untuk Seller Indonesia.</div>
         </div>
       </footer>
     </div>

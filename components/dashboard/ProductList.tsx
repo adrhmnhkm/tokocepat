@@ -17,7 +17,7 @@ export default function ProductList({ products }: { products: Product[] }) {
     startTransition(async () => {
       const result = await deleteProduct(id);
       setConfirmId(null);
-      if (result?.error) {
+      if (result && "error" in result) {
         toast.error(result.error);
       } else {
         toast.success("Produk berhasil dihapus.");

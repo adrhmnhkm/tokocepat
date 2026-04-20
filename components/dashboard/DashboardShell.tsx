@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Sidebar from "@/components/dashboard/Sidebar";
 import FeedbackWidget from "@/components/dashboard/FeedbackWidget";
+import Logo from "@/components/ui/Logo";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -51,7 +52,7 @@ export default function DashboardShell({ user, children }: Props) {
               <span className="block w-5 h-0.5 bg-slate-700 rounded" />
             </div>
           </button>
-          <span className="text-sm font-bold text-slate-900">TokoCepat</span>
+          <Logo size="sm" asLink={false} />
           <div className="w-9" />
         </header>
 

@@ -1,9 +1,9 @@
 "use client";
 
 import { useActionState } from "react";
-import Link from "next/link";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
+import Logo from "@/components/ui/Logo";
 import {
   createOnboardingStore,
   type OnboardingState,
@@ -19,14 +19,8 @@ export default function OnboardingPage() {
   return (
     <div className="min-h-screen bg-white flex flex-col">
       {/* Top bar */}
-      <header className="px-6 py-5 border-b border-slate-100">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 hover:text-slate-700 transition-colors"
-        >
-          <span className="w-2 h-2 rounded-full bg-green-600 flex-shrink-0" />
-          KirimLink
-        </Link>
+      <header className="px-6 py-4 border-b border-slate-100">
+        <Logo size="sm" />
       </header>
 
       {/* Main content */}

@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { cn } from "@/lib/utils";
+import Logo from "@/components/ui/Logo";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard" },
@@ -21,14 +22,8 @@ export default function Sidebar({ user }: Props) {
   return (
     <aside className="w-64 bg-slate-900 min-h-screen flex flex-col flex-shrink-0">
       {/* Logo */}
-      <div className="px-6 py-5 border-b border-slate-800">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-lg font-bold text-white"
-        >
-          <span className="w-2.5 h-2.5 rounded-full bg-green-500" />
-          KirimLink
-        </Link>
+      <div className="px-4 py-4 border-b border-slate-800">
+        <Logo size="sm" href="/" />
       </div>
 
       {/* Navigation */}

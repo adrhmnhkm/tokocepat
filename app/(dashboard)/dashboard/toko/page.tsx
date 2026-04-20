@@ -25,7 +25,7 @@ export default async function TokoPage() {
       {store && (
         <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-xl flex items-center justify-between gap-4">
           <div>
-            <p className="text-sm font-semibold text-green-800">Link toko kamu aktif</p>
+            <p className="text-sm font-semibold text-green-800">Preview toko kamu</p>
             <p className="text-xs text-green-700 font-mono mt-0.5">
               /{store.slug}
             </p>
