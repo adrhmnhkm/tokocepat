@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { isReservedSlug } from "@/lib/reserved-slugs";
 
 export const registerSchema = z
   .object({
@@ -23,7 +24,8 @@ export const storeSchema = z.object({
     .string()
     .min(3, "Slug minimal 3 karakter")
     .max(50, "Slug maksimal 50 karakter")
-    .regex(/^[a-z0-9-]+$/, "Slug hanya boleh huruf kecil, angka, dan strip"),
+    .regex(/^[a-z0-9-]+$/, "Slug hanya boleh huruf kecil, angka, dan strip")
+    .refine((s) => !isReservedSlug(s), "Slug ini tidak bisa digunakan. Pilih nama lain."),
   description: z.string().max(200, "Deskripsi maksimal 200 karakter").optional(),
   whatsapp: z
     .string()

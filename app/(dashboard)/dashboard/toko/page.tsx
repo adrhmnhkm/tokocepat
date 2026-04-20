@@ -27,11 +27,11 @@ export default async function TokoPage() {
           <div>
             <p className="text-sm font-semibold text-green-800">Link toko kamu aktif</p>
             <p className="text-xs text-green-700 font-mono mt-0.5">
-              /toko/{store.slug}
+              /{store.slug}
             </p>
           </div>
           <Link
-            href={`/toko/${store.slug}`}
+            href={`/${store.slug}`}
             target="_blank"
             className="text-xs font-semibold text-green-700 underline hover:no-underline whitespace-nowrap"
           >

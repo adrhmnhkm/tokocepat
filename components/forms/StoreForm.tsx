@@ -95,7 +95,7 @@ export default function StoreForm({ store }: Props) {
             + Tambah Produk Pertama
           </Link>
           <Link
-            href={`/toko/${createdSlug}`}
+            href={`/${createdSlug}`}
             target="_blank"
             className="inline-flex items-center justify-center gap-2 bg-white text-slate-700 font-semibold px-6 py-2.5 rounded-full border border-slate-200 hover:border-slate-400 transition-colors"
           >
@@ -166,7 +166,7 @@ export default function StoreForm({ store }: Props) {
         <p className="text-xs text-slate-400 break-all">
           Link toko:{" "}
           <span className="font-mono text-slate-600">
-            {origin}/toko/{slug || "slug-toko"}
+            {origin}/{slug || "slug-toko"}
           </span>
         </p>
       </div>

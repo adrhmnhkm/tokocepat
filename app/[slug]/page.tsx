@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { formatRupiah } from "@/lib/utils";
+import { isReservedSlug } from "@/lib/reserved-slugs";
 import Image from "next/image";
 import type { Metadata } from "next";
 import WhatsAppButton from "@/components/store/WhatsAppButton";
@@ -9,16 +10,20 @@ type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
+  if (isReservedSlug(slug)) return { title: "Halaman tidak ditemukan" };
   const store = await prisma.store.findUnique({ where: { slug } });
   if (!store) return { title: "Toko tidak ditemukan" };
   return {
-    title: `${store.name} — TokoCepat`,
+    title: `${store.name} — kirimlink.id`,
     description: store.description ?? `Belanja di ${store.name} lewat WhatsApp.`,
   };
 }
 
 export default async function StorePage({ params }: Props) {
   const { slug } = await params;
+
+  // Jangan tangkap reserved routes
+  if (isReservedSlug(slug)) notFound();
 
   const store = await prisma.store.findUnique({
     where: { slug },
@@ -90,7 +95,7 @@ export default async function StorePage({ params }: Props) {
 
       {/* Footer */}
       <p className="text-center text-xs text-slate-300 pb-8">
-        Dibuat dengan <span className="font-semibold">TokoCepat</span>
+        Dibuat dengan <span className="font-semibold">kirimlink.id</span>
       </p>
     </div>
   );

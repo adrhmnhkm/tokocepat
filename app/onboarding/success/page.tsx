@@ -8,7 +8,7 @@ export default async function OnboardingSuccessPage() {
   if (!store) redirect("/onboarding");
 
   const storeSlug = store.slug;
-  const storePath = `/toko/${storeSlug}`;
+  const storePath = `/${storeSlug}`;
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
@@ -55,7 +55,7 @@ export default async function OnboardingSuccessPage() {
           <div className="bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 mb-5 animate-enter-delayed">
             <p className="text-xs text-slate-400 mb-1">Link toko kamu</p>
             <p className="text-sm font-mono text-slate-700 break-all leading-relaxed">
-              tokocepat.web.id{storePath}
+              kirimlink.id{storePath}
             </p>
           </div>
 

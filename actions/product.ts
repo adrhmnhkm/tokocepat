@@ -49,7 +49,7 @@ export async function saveProduct(
   }
 
   revalidatePath("/dashboard/produk");
-  revalidatePath(`/toko/${store.slug}`);
+  revalidatePath(`/${store.slug}`);
   redirect("/dashboard/produk");
 }
 
@@ -68,7 +68,7 @@ export async function deleteProduct(id: string): Promise<ProductActionState> {
   await prisma.product.delete({ where: { id } });
 
   revalidatePath("/dashboard/produk");
-  revalidatePath(`/toko/${store.slug}`);
+  revalidatePath(`/${store.slug}`);
   return null;
 }
 

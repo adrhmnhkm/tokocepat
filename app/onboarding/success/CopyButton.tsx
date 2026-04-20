@@ -8,7 +8,7 @@ export default function CopyButton({ slug }: Props) {
   const [copied, setCopied] = useState(false);
 
   async function handleCopy() {
-    const url = `${window.location.origin}/toko/${slug}`;
+    const url = `${window.location.origin}/${slug}`;
     try {
       await navigator.clipboard.writeText(url);
       setCopied(true);

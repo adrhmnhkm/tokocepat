@@ -44,7 +44,7 @@ export async function upsertStore(
 
   revalidatePath("/dashboard");
   revalidatePath("/dashboard/toko");
-  revalidatePath(`/toko/${slug}`);
+  revalidatePath(`/${slug}`);
 
   return { success: "Toko berhasil disimpan!" };
 }

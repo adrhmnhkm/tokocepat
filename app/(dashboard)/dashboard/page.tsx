@@ -50,8 +50,8 @@ export default async function DashboardPage() {
           <StatCard
             label="Link Toko"
             value="Buka toko ↗"
-            href={`/toko/${store.slug}`}
-            sub={`/toko/${store.slug}`}
+            href={`/${store.slug}`}
+            sub={`/${store.slug}`}
             linkTarget="_blank"
           />
         </div>
@@ -75,7 +75,7 @@ export default async function DashboardPage() {
               Edit Toko
             </Link>
             <Link
-              href={`/toko/${store.slug}`}
+              href={`/${store.slug}`}
               target="_blank"
               className="inline-flex items-center gap-2 bg-white text-slate-700 text-sm font-semibold px-5 py-3 rounded-lg border border-slate-200 hover:border-slate-300 transition-colors min-h-[44px]"
             >
