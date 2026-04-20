@@ -108,7 +108,7 @@ export default function LandingPage() {
           {[
             { value: "500+", label: "seller sudah bergabung" },
             { value: "5 menit", label: "rata-rata waktu setup" },
-            { value: "QRIS", label: "& transfer didukung" },
+            { value: "Gratis", label: "untuk mulai, tanpa kartu kredit" },
             { value: "Mobile-first", label: "untuk buyer Indonesia" },
           ].map((s) => (
             <div key={s.value} className="flex items-center gap-2 text-slate-400 text-sm">
@@ -132,10 +132,10 @@ export default function LandingPage() {
           </p>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
-              { icon: "💬", title: "Chat order bercampur-campur", desc: "Order masuk bareng chat biasa, susah dilacak dan gampang terlewat." },
-              { icon: "🌐", title: "Belum punya halaman jualan", desc: "Pembeli bingung lihat produk dan tidak ada tempat yang jelas untuk order." },
-              { icon: "💸", title: "Pembayaran masih manual", desc: "Transfer dicek satu-satu, konfirmasi bayar bolak-balik, proses jadi lama." },
-              { icon: "🤯", title: "Bingung mulai dari mana", desc: "Website terasa rumit, banyak setting teknis yang tidak dimengerti." },
+              { icon: "📤", title: "Kirim katalog yang sama berulang-ulang", desc: "Tiap ada calon pembeli baru, kamu harus kirim foto, harga, dan info produk dari awal lagi. Capek dan buang waktu." },
+              { icon: "🌐", title: "Belum punya tempat lihat produk", desc: "Pembeli harus tanya dulu baru tahu produk apa yang ada. Tidak ada tempat yang bisa dibuka sendiri." },
+              { icon: "💬", title: "Chat WA penuh pertanyaan yang sama", desc: "\"Ada apa aja?\" \"Berapa harganya?\" — pertanyaan yang sama dijawab berkali-kali setiap hari." },
+              { icon: "🤯", title: "Bingung mulai jualan online", desc: "Bikin website terasa rumit, banyak istilah teknis yang tidak dimengerti. Akhirnya tidak jadi mulai." },
             ].map((item) => (
               <div
                 key={item.title}
@@ -167,12 +167,12 @@ export default function LandingPage() {
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
-              { icon: "🏪", title: "Halaman jualan siap pakai", desc: "Buat toko simpel tanpa coding. Isi nama, produk, harga, dan foto — selesai." },
-              { icon: "🔗", title: "Satu link untuk semua channel", desc: "Pasang di bio IG, TikTok, atau kirim langsung ke calon pembeli via WhatsApp." },
-              { icon: "💬", title: "Closing via WhatsApp", desc: "Pembeli bisa langsung chat per produk. Closing jadi lebih cepat dan tidak terlewat." },
-              { icon: "💳", title: "Pembayaran digital lokal", desc: "Terima QRIS dan transfer bank. Familiar untuk buyer Indonesia, proses lebih lancar." },
-              { icon: "📱", title: "Mobile-first", desc: "Tampilan enak dilihat dari HP karena mayoritas belanja online Indonesia lewat mobile." },
-              { icon: "⚡", title: "Setup dalam 5 menit", desc: "Tidak perlu domain, DNS, atau setting rumit. Daftar, isi produk, langsung jualan." },
+              { icon: "🏪", title: "Halaman toko yang rapi", desc: "Buat halaman produk simpel tanpa coding. Isi nama toko, foto, harga, dan deskripsi — selesai." },
+              { icon: "🔗", title: "Satu link untuk semua", desc: "Bagikan ke grup WA, bio IG, TikTok, atau langsung ke calon pembeli. Satu link, semua produk terlihat." },
+              { icon: "💬", title: "Pembeli chat langsung via WhatsApp", desc: "Setelah lihat produk, pembeli bisa langsung chat kamu. Tidak perlu tanya-tanya dulu baru tahu produknya." },
+              { icon: "📦", title: "Produk tampil lengkap dan jelas", desc: "Foto, nama, harga, dan deskripsi tampil rapi. Pembeli bisa lihat sendiri sebelum memutuskan order." },
+              { icon: "📱", title: "Nyaman dibuka dari HP", desc: "Tampilan didesain untuk mobile karena sebagian besar pembeli Indonesia browsing dari HP." },
+              { icon: "⚡", title: "Setup dalam 5 menit", desc: "Tidak perlu domain, tidak perlu coding, tidak perlu bantuan teknis. Daftar, isi produk, bagikan link." },
             ].map((f) => (
               <div key={f.title} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200">
                 <div className="w-10 h-10 bg-green-50 rounded-lg grid place-items-center text-xl mb-4">
@@ -199,9 +199,9 @@ export default function LandingPage() {
           </p>
           <div className="grid lg:grid-cols-3 gap-0 lg:divide-x divide-slate-200">
             {[
-              { n: 1, title: "Isi produk dan info toko", desc: "Masukkan nama toko, foto produk, harga, dan deskripsi singkat. Selesai dalam hitungan menit." },
-              { n: 2, title: "Bagikan link jualanmu", desc: "Pasang di bio IG/TikTok atau kirim langsung ke grup WhatsApp dan calon pembeli." },
-              { n: 3, title: "Terima order & pembayaran", desc: "Pembeli lihat produk, chat kamu via WhatsApp, lalu bayar pakai QRIS atau transfer." },
+              { n: 1, title: "Buat toko dan isi produk", desc: "Masukkan nama toko, foto produk, harga, dan deskripsi singkat. Selesai dalam hitungan menit." },
+              { n: 2, title: "Kirim linknya ke pembeli", desc: "Bagikan ke grup WA, bio IG/TikTok, atau langsung ke calon pembeli yang tanya produkmu." },
+              { n: 3, title: "Pembeli lihat, lalu chat WA", desc: "Pembeli buka link, lihat semua produk sendiri, lalu langsung chat kamu di WhatsApp untuk order." },
             ].map((s, i) => (
               <div key={s.n} className={`flex gap-5 items-start p-7 ${i > 0 ? "border-t lg:border-t-0 border-slate-200" : ""}`}>
                 <div className="w-10 h-10 rounded-full bg-green-600 text-white grid place-items-center font-extrabold text-base flex-shrink-0">
@@ -240,15 +240,15 @@ export default function LandingPage() {
             {[
               {
                 initial: "R", name: "Rani Oktavia", role: "Seller Fashion, Instagram",
-                quote: "Dulu order masuk dari DM IG dicampur chat biasa, sering ketinggalan. Sekarang pembeli tinggal klik link, langsung chat WA, dan bayar. Closing jadi jauh lebih cepat.",
+                quote: "Dulu tiap ada yang tanya, aku harus kirim foto produk satu-satu lagi. Sekarang tinggal kirim link, mereka lihat sendiri, terus chat langsung kalau mau order. Jauh lebih hemat waktu.",
               },
               {
                 initial: "A", name: "Andi Pratama", role: "UMKM Kuliner Rumahan",
-                quote: "Saya jualan camilan rumahan. Dulu pembeli sering bingung cara ordernya. Sekarang ada halaman produk yang jelas, langsung bisa bayar QRIS. Lebih enak buat saya dan pembeli.",
+                quote: "Saya jualan camilan rumahan lewat WA. Dulu pembeli sering bingung ada menu apa aja dan berapa harganya. Sekarang ada halaman yang bisa mereka buka sendiri. Lebih enak buat dua-duanya.",
               },
               {
                 initial: "F", name: "Fajar Nugroho", role: "Reseller & Dropshipper",
-                quote: "Sebagai dropshipper, saya butuh yang bisa dipakai cepat. Setup-nya nggak ribet sama sekali, langsung bisa dipromosikan di TikTok. Orderan naik dalam seminggu pertama.",
+                quote: "Setup-nya cepat banget, nggak ribet sama sekali. Langsung aku pasang di bio TikTok dan kirim ke grup. Sekarang orang bisa lihat produk dulu sebelum nanya, jadi chat-nya lebih fokus ke yang serius beli.",
               },
             ].map((t) => (
               <div key={t.name} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200">
@@ -315,12 +315,12 @@ export default function LandingPage() {
           </h2>
           <div className="flex flex-col gap-2 max-w-2xl">
             {[
-              { q: "Apakah saya harus paham coding atau teknis?", a: "Tidak perlu. Platform ini dibuat khusus untuk seller non-teknis. Tidak ada coding, tidak ada setting domain yang rumit." },
-              { q: "Saya belum punya website, apakah bisa langsung pakai?", a: "Bisa. Justru platform ini paling cocok untuk yang belum punya website. Kamu langsung dapat link halaman jualan yang siap dipakai." },
-              { q: "Apakah cocok untuk jualan lewat WhatsApp?", a: "Sangat cocok. Alur utama platform ini memang dirancang supaya pembeli bisa langsung lanjut chat dan closing via WhatsApp." },
-              { q: "Bisa dipakai untuk seller Instagram dan TikTok?", a: "Bisa. Tinggal pasang link di bio IG atau TikTok, atau bagikan langsung ke calon pembeli lewat DM atau story." },
-              { q: "Metode pembayaran apa yang didukung?", a: "QRIS dan transfer bank lokal — dua metode yang paling familiar dan mudah dipakai oleh buyer Indonesia." },
-              { q: "Berapa lama proses setup awalnya?", a: "Rata-rata 5 menit. Isi nama toko, tambahkan produk, dan link jualanmu sudah siap dibagikan." },
+              { q: "Apakah saya harus paham coding atau teknis?", a: "Tidak perlu sama sekali. Dibuat khusus untuk seller non-teknis. Tidak ada coding, tidak ada domain, tidak ada setting rumit." },
+              { q: "Saya belum punya website, apakah bisa langsung pakai?", a: "Justru ini paling cocok untuk yang belum punya website. Kamu langsung dapat link halaman toko yang siap dibagikan." },
+              { q: "Kalau pembeli mau order, bagaimana caranya?", a: "Pembeli buka link tokomu, lihat produk dan harga, lalu klik tombol WhatsApp untuk langsung chat kamu. Proses closing tetap lewat WA seperti biasa." },
+              { q: "Bisa dipakai untuk seller Instagram dan TikTok?", a: "Bisa. Pasang link di bio IG atau TikTok, atau kirim langsung ke calon pembeli lewat DM atau story." },
+              { q: "Apakah kirimlink.id menggantikan WhatsApp saya?", a: "Tidak. kirimlink.id adalah halaman produk yang bisa dilihat pembeli sebelum mereka chat kamu di WA. WhatsApp tetap dipakai untuk closing." },
+              { q: "Berapa lama proses setup awalnya?", a: "Rata-rata 5 menit. Isi nama toko, tambahkan produk, dan link toko kamu sudah siap dibagikan." },
             ].map((item) => (
               <details key={item.q} className="group bg-white border border-slate-200 rounded-xl overflow-hidden open:border-slate-300 transition-colors">
                 <summary className="flex justify-between items-center px-5 py-4 font-semibold text-sm cursor-pointer list-none text-slate-800 select-none">
