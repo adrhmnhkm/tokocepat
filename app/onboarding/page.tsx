@@ -25,7 +25,7 @@ export default function OnboardingPage() {
           className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 hover:text-slate-700 transition-colors"
         >
           <span className="w-2 h-2 rounded-full bg-green-600 flex-shrink-0" />
-          TokoCepat
+          KirimLink
         </Link>
       </header>
 

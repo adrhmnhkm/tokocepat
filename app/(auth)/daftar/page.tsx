@@ -68,7 +68,7 @@ export default function DaftarPage() {
             className="inline-flex items-center gap-2 text-base font-semibold text-slate-900"
           >
             <span className="w-2 h-2 rounded-full bg-green-600" />
-            TokoCepat
+            KirimLink
           </Link>
           <h1 className="mt-4 text-xl font-bold text-slate-900">
             Buat akun gratis

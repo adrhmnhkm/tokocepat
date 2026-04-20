@@ -27,7 +27,7 @@ export default function Sidebar({ user }: Props) {
           className="inline-flex items-center gap-2 text-lg font-bold text-white"
         >
           <span className="w-2.5 h-2.5 rounded-full bg-green-500" />
-          TokoCepat
+          KirimLink
         </Link>
       </div>
 
