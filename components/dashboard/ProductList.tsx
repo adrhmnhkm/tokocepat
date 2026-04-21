@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { deleteProduct } from "@/actions/product";
+import { deleteProduct, setFeaturedProduct } from "@/actions/product";
 import { formatRupiah } from "@/lib/utils";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 import { toast } from "sonner";
@@ -21,6 +21,17 @@ export default function ProductList({ products }: { products: Product[] }) {
         toast.error(result.error);
       } else {
         toast.success("Produk berhasil dihapus.");
+      }
+    });
+  }
+
+  function handleSetFeatured(id: string) {
+    startTransition(async () => {
+      const result = await setFeaturedProduct(id);
+      if (result && "error" in result) {
+        toast.error(result.error);
+      } else {
+        toast.success("Produk unggulan berhasil diubah.");
       }
     });
   }
@@ -54,25 +65,25 @@ export default function ProductList({ products }: { products: Product[] }) {
             {/* Thumbnail */}
             <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 relative">
               {product.imageUrl ? (
-                <Image
-                  src={product.imageUrl}
-                  alt={product.name}
-                  fill
-                  className="object-cover"
-                />
+                <Image src={product.imageUrl} alt={product.name} fill className="object-cover" />
               ) : (
-                <div className="w-full h-full grid place-items-center text-2xl">
-                  📦
-                </div>
+                <div className="w-full h-full grid place-items-center text-2xl">📦</div>
               )}
             </div>
 
             {/* Info */}
             <div className="flex-1 min-w-0">
-              <h3 className="font-bold text-slate-900 truncate text-sm sm:text-base">{product.name}</h3>
-              <p className="text-green-600 font-bold text-sm">
-                {formatRupiah(product.price)}
-              </p>
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <h3 className="font-bold text-slate-900 truncate text-sm sm:text-base">
+                  {product.name}
+                </h3>
+                {product.isFeatured && (
+                  <span className="inline-flex items-center gap-0.5 text-[10px] font-bold text-amber-600 bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded-full flex-shrink-0">
+                    ⭐ Unggulan
+                  </span>
+                )}
+              </div>
+              <p className="text-green-600 font-bold text-sm">{formatRupiah(product.price)}</p>
               {product.description && (
                 <p className="text-xs text-slate-400 truncate mt-0.5 hidden sm:block">
                   {product.description}
@@ -80,8 +91,18 @@ export default function ProductList({ products }: { products: Product[] }) {
               )}
             </div>
 
-            {/* Actions — min 44px tap target */}
-            <div className="flex items-center gap-2 flex-shrink-0">
+            {/* Actions */}
+            <div className="flex items-center gap-1.5 flex-shrink-0">
+              {/* Tombol unggulan */}
+              <button
+                onClick={() => handleSetFeatured(product.id)}
+                disabled={isPending || product.isFeatured}
+                title={product.isFeatured ? "Sudah jadi unggulan" : "Jadikan produk unggulan"}
+                className="inline-flex items-center justify-center min-h-[40px] w-10 rounded-full border transition-colors disabled:opacity-40 disabled:cursor-not-allowed border-amber-200 text-amber-500 hover:bg-amber-50"
+              >
+                ⭐
+              </button>
+
               <Link
                 href={`/dashboard/produk/${product.id}/edit`}
                 className="inline-flex items-center justify-center min-h-[40px] px-3.5 text-xs font-semibold text-slate-600 border border-slate-200 rounded-full hover:border-slate-400 transition-colors"

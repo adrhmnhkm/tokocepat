@@ -27,11 +27,16 @@ export default async function StorePage({ params }: Props) {
 
   const store = await prisma.store.findUnique({
     where: { slug },
-    include: { products: { orderBy: { createdAt: "desc" } } },
+    include: {
+      products: {
+        orderBy: [{ isFeatured: "desc" }, { createdAt: "desc" }],
+      },
+    },
   });
 
   if (!store) notFound();
 
+  // Produk pertama adalah unggulan (isFeatured=true) atau terbaru jika tidak ada yang di-featured
   const [hero, ...rest] = store.products;
 
   return (
@@ -97,16 +102,20 @@ export default async function StorePage({ params }: Props) {
                     "0 20px 60px rgba(0,0,0,0.10), 0 6px 18px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.9)",
                 }}
               >
-                {/* Badge terlaris */}
+                {/* Badge unggulan / terbaru */}
                 <div className="px-5 pt-5 flex items-center gap-2">
                   <span
                     className="text-xs font-black text-white px-3 py-1 rounded-full"
                     style={{
-                      background: "linear-gradient(90deg, #f59e0b, #f97316)",
-                      boxShadow: "0 3px 10px rgba(249,115,22,0.40)",
+                      background: hero.isFeatured
+                        ? "linear-gradient(90deg, #f59e0b, #f97316)"
+                        : "linear-gradient(90deg, #6366f1, #8b5cf6)",
+                      boxShadow: hero.isFeatured
+                        ? "0 3px 10px rgba(249,115,22,0.40)"
+                        : "0 3px 10px rgba(139,92,246,0.35)",
                     }}
                   >
-                    ⭐ Terlaris
+                    {hero.isFeatured ? "⭐ Produk Unggulan" : "✨ Terbaru"}
                   </span>
                 </div>
 
@@ -197,14 +206,19 @@ export default async function StorePage({ params }: Props) {
                       </div>
 
                       {/* Info */}
-                      <div className="p-3 flex flex-col gap-2 flex-1">
+                      <div className="p-3 flex flex-col gap-1.5 flex-1">
                         <h2 className="font-bold text-slate-800 text-sm leading-tight line-clamp-2">
                           {p.name}
                         </h2>
+                        {p.description && (
+                          <p className="text-xs text-slate-400 leading-relaxed line-clamp-2">
+                            {p.description}
+                          </p>
+                        )}
                         <p className="font-extrabold text-sm" style={{ color: "#059669" }}>
                           {formatRupiah(p.price)}
                         </p>
-                        <div className="mt-auto">
+                        <div className="mt-auto pt-1">
                           <WhatsAppButton
                             phone={store.whatsapp}
                             productName={p.name}

@@ -83,8 +83,37 @@ export async function getMyProducts() {
 
   const store = await prisma.store.findUnique({
     where: { userId: session.user.id },
-    include: { products: { orderBy: { createdAt: "desc" } } },
+    include: {
+      products: { orderBy: [{ isFeatured: "desc" }, { createdAt: "desc" }] },
+    },
   });
 
   return store?.products ?? [];
+}
+
+export async function setFeaturedProduct(productId: string): Promise<{ error: string } | null> {
+  const session = await auth();
+  if (!session?.user?.id) return { error: "Tidak terautentikasi." };
+
+  const store = await getStoreForUser(session.user.id);
+  if (!store) return { error: "Toko tidak ditemukan." };
+
+  const product = await prisma.product.findUnique({ where: { id: productId } });
+  if (!product || product.storeId !== store.id) return { error: "Produk tidak ditemukan." };
+
+  // Unset semua produk lain, lalu set yang dipilih
+  await prisma.$transaction([
+    prisma.product.updateMany({
+      where: { storeId: store.id },
+      data: { isFeatured: false },
+    }),
+    prisma.product.update({
+      where: { id: productId },
+      data: { isFeatured: true },
+    }),
+  ]);
+
+  revalidatePath("/dashboard/produk");
+  revalidatePath(`/${store.slug}`);
+  return null;
 }
