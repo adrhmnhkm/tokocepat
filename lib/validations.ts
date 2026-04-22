@@ -27,6 +27,7 @@ export const storeSchema = z.object({
     .regex(/^[a-z0-9-]+$/, "Slug hanya boleh huruf kecil, angka, dan strip")
     .refine((s) => !isReservedSlug(s), "Slug ini tidak bisa digunakan. Pilih nama lain."),
   description: z.string().max(200, "Deskripsi maksimal 200 karakter").optional(),
+  logoUrl: z.string().url("URL logo tidak valid").optional().or(z.literal("")),
   whatsapp: z
     .string()
     .min(9, "Nomor WhatsApp tidak valid")

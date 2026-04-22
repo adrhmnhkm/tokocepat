@@ -7,9 +7,10 @@ import Spinner from "./Spinner";
 type Props = {
   value?: string;
   onChange: (url: string) => void;
+  label?: string;
 };
 
-export default function ImageUpload({ value, onChange }: Props) {
+export default function ImageUpload({ value, onChange, label = "Foto Produk" }: Props) {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -49,7 +50,7 @@ export default function ImageUpload({ value, onChange }: Props) {
   return (
     <div className="space-y-1.5">
       <label className="block text-sm font-semibold text-slate-700">
-        Foto Produk
+        {label}
         <span className="ml-1 text-slate-400 font-normal">(opsional)</span>
       </label>
 

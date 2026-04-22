@@ -48,14 +48,26 @@ export default async function StorePage({ params }: Props) {
       <div className="px-5 pt-10 pb-6 flex flex-col items-center text-center">
         {/* Logo bubble — clay effect */}
         <div
-          className="w-[72px] h-[72px] rounded-[24px] flex items-center justify-center text-[2rem] mb-4 select-none"
+          className="w-[72px] h-[72px] rounded-[24px] flex items-center justify-center text-[2rem] mb-4 select-none overflow-hidden"
           style={{
-            background: "linear-gradient(135deg, #34d399 0%, #059669 100%)",
+            background: store.logoUrl
+              ? "transparent"
+              : "linear-gradient(135deg, #34d399 0%, #059669 100%)",
             boxShadow:
               "0 10px 30px rgba(16,185,129,0.35), 0 4px 10px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.35)",
           }}
         >
-          🛍️
+          {store.logoUrl ? (
+            <Image
+              src={store.logoUrl}
+              alt={`Logo ${store.name}`}
+              width={72}
+              height={72}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            "🛍️"
+          )}
         </div>
 
         <h1 className="text-2xl font-black text-slate-800 tracking-tight">{store.name}</h1>

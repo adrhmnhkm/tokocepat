@@ -22,7 +22,7 @@ export async function upsertStore(
     return { error: result.error.errors[0].message };
   }
 
-  const { name, slug, description, whatsapp } = result.data;
+  const { name, slug, description, logoUrl, whatsapp } = result.data;
   const normalizedWA = normalizeWhatsApp(whatsapp);
 
   // Cek slug konflik dengan toko lain
@@ -38,8 +38,8 @@ export async function upsertStore(
 
   await prisma.store.upsert({
     where: { userId: session.user.id },
-    create: { name, slug, description, whatsapp: normalizedWA, userId: session.user.id },
-    update: { name, slug, description, whatsapp: normalizedWA },
+    create: { name, slug, description, logoUrl: logoUrl || null, whatsapp: normalizedWA, userId: session.user.id },
+    update: { name, slug, description, logoUrl: logoUrl || null, whatsapp: normalizedWA },
   });
 
   revalidatePath("/dashboard");

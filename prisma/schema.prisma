@@ -25,6 +25,7 @@ model Store {
   name        String
   slug        String    @unique
   description String?
+  logoUrl     String?
   whatsapp    String
   userId      String    @unique
   user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)

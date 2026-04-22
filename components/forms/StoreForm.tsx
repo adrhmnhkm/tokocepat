@@ -9,6 +9,7 @@ import Button from "@/components/ui/Button";
 import { toast } from "sonner";
 import Link from "next/link";
 import { track } from "@/lib/analytics";
+import ImageUpload from "@/components/ui/ImageUpload";
 import type { Store } from "@prisma/client";
 
 type Props = { store?: Store | null };
@@ -26,6 +27,7 @@ export default function StoreForm({ store }: Props) {
 
   const [name, setName] = useState(store?.name ?? "");
   const [slug, setSlug] = useState(store?.slug ?? "");
+  const [logoUrl, setLogoUrl] = useState(store?.logoUrl ?? "");
   const [slugStatus, setSlugStatus] = useState<SlugStatus>("idle");
 
   // Auto-generate slug dari nama (hanya untuk toko baru)
@@ -190,6 +192,9 @@ export default function StoreForm({ store }: Props) {
         required
         hint="Nomor ini yang akan dihubungi pembeli"
       />
+
+      <ImageUpload label="Logo Toko" value={logoUrl} onChange={setLogoUrl} />
+      <input type="hidden" name="logoUrl" value={logoUrl} />
 
       <Button type="submit" loading={pending} size="lg" className="w-full">
         {pending
