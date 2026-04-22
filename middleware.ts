@@ -9,10 +9,20 @@ export default auth((req) => {
   const isOnboarding = pathname.startsWith("/onboarding");
   const isAuthPage =
     pathname.startsWith("/masuk") || pathname.startsWith("/daftar");
+  const isAdmin = pathname.startsWith("/admin");
 
   // Protect dashboard and onboarding — require login
   if ((isDashboard || isOnboarding) && !isLoggedIn) {
     return NextResponse.redirect(new URL("/masuk", req.url));
+  }
+
+  // Protect admin — require login + email match ADMIN_EMAIL
+  if (isAdmin) {
+    const adminEmail = process.env.ADMIN_EMAIL;
+    const userEmail = req.auth?.user?.email;
+    if (!isLoggedIn || !adminEmail || userEmail !== adminEmail) {
+      return NextResponse.redirect(new URL("/masuk", req.url));
+    }
   }
 
   // Redirect logged-in users away from auth pages

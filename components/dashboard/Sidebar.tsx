@@ -10,6 +10,7 @@ const navItems = [
   { href: "/dashboard", label: "Dashboard" },
   { href: "/dashboard/toko", label: "Toko Saya" },
   { href: "/dashboard/produk", label: "Produk" },
+  { href: "/dashboard/analitik", label: "Analitik" },
 ];
 
 type Props = {

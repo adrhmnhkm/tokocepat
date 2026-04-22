@@ -5,14 +5,23 @@ import { normalizeWhatsApp } from "@/lib/utils";
 type Props = {
   phone: string;
   storeName: string;
+  storeId: string;
 };
 
-export default function StickyWAButton({ phone, storeName }: Props) {
+export default function StickyWAButton({ phone, storeName, storeId }: Props) {
   if (!phone) return null;
 
   const nomor = normalizeWhatsApp(phone);
   const pesan = `Halo kak, saya mau tanya-tanya tentang produk di *${storeName}* 😊`;
   const url = `https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`;
+
+  function handleClick() {
+    fetch("/api/analytics/wa-click", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ storeId }),
+    }).catch(() => {});
+  }
 
   return (
     <div className="fixed bottom-0 inset-x-0 z-50 px-4 pb-5 pt-4 bg-gradient-to-t from-[#FFF5E6]/95 via-[#FFF5E6]/70 to-transparent pointer-events-none">
@@ -20,6 +29,7 @@ export default function StickyWAButton({ phone, storeName }: Props) {
         href={url}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={handleClick}
         className="pointer-events-auto flex items-center justify-center gap-2.5 w-full max-w-[520px] mx-auto bg-[#25d366] text-white font-black py-4 rounded-2xl text-base transition-all duration-150 active:scale-[0.97] active:shadow-[0_4px_16px_rgba(37,211,102,0.4)]"
         style={{
           boxShadow: "0 8px 28px rgba(37,211,102,0.45), 0 2px 8px rgba(0,0,0,0.10)",

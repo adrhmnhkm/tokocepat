@@ -6,6 +6,7 @@ type Props = {
   phone: string;
   productName: string;
   price: number;
+  storeId: string;
   hero?: boolean;
 };
 
@@ -16,7 +17,15 @@ const WA_ICON = (
   </svg>
 );
 
-export default function WhatsAppButton({ phone, productName, price, hero = false }: Props) {
+function trackWaClick(storeId: string) {
+  fetch("/api/analytics/wa-click", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ storeId }),
+  }).catch(() => {});
+}
+
+export default function WhatsAppButton({ phone, productName, price, storeId, hero = false }: Props) {
   if (!phone) return null;
 
   if (hero) {
@@ -25,6 +34,7 @@ export default function WhatsAppButton({ phone, productName, price, hero = false
         href={buildWAUrl(phone, productName, price)}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => trackWaClick(storeId)}
         className="flex items-center justify-center gap-2.5 w-full bg-[#25d366] text-white font-black py-4 rounded-2xl text-base transition-all duration-150 active:scale-[0.97]"
         style={{
           boxShadow: "0 8px 28px rgba(37,211,102,0.40), 0 2px 8px rgba(0,0,0,0.08)",
@@ -41,6 +51,7 @@ export default function WhatsAppButton({ phone, productName, price, hero = false
       href={buildWAUrl(phone, productName, price)}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => trackWaClick(storeId)}
       className="flex items-center justify-center gap-1.5 w-full bg-[#25d366] text-white font-bold py-2.5 rounded-xl text-sm transition-all duration-150 active:scale-[0.97]"
       style={{
         boxShadow: "0 4px 14px rgba(37,211,102,0.35), 0 1px 4px rgba(0,0,0,0.07)",

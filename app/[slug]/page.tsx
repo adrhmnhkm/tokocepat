@@ -6,6 +6,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import WhatsAppButton from "@/components/store/WhatsAppButton";
 import StickyWAButton from "@/components/store/StickyWAButton";
+import StoreTracker from "@/components/store/StoreTracker";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -44,6 +45,7 @@ export default async function StorePage({ params }: Props) {
       className="min-h-screen pb-32"
       style={{ background: "linear-gradient(145deg, #FFF5E6 0%, #FFF0F8 50%, #F0FFF6 100%)" }}
     >
+      <StoreTracker storeId={store.id} />
       {/* ===== HEADER ===== */}
       <div className="px-5 pt-10 pb-6 flex flex-col items-center text-center">
         {/* Logo bubble — clay effect */}
@@ -178,6 +180,7 @@ export default async function StorePage({ params }: Props) {
                       phone={store.whatsapp}
                       productName={hero.name}
                       price={hero.price}
+                      storeId={store.id}
                       hero
                     />
                   </div>
@@ -235,6 +238,7 @@ export default async function StorePage({ params }: Props) {
                             phone={store.whatsapp}
                             productName={p.name}
                             price={p.price}
+                            storeId={store.id}
                           />
                         </div>
                       </div>
@@ -254,7 +258,7 @@ export default async function StorePage({ params }: Props) {
 
       {/* ===== STICKY CTA ===== */}
       {store.whatsapp && (
-        <StickyWAButton phone={store.whatsapp} storeName={store.name} />
+        <StickyWAButton phone={store.whatsapp} storeName={store.name} storeId={store.id} />
       )}
     </div>
   );
