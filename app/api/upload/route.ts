@@ -2,6 +2,10 @@ import { type NextRequest, NextResponse } from "next/server";
 import cloudinary from "@/lib/cloudinary";
 import { auth } from "@/lib/auth";
 
+export const config = {
+  api: { bodyParser: false, responseLimit: "5mb" },
+};
+
 export async function POST(req: NextRequest) {
   const session = await auth();
   if (!session?.user) {
