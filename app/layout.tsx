@@ -15,7 +15,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "KirimLink — Jualan Online Simpel untuk Seller Indonesia",
+  title: "KirimLink — Katalog Online untuk Seller WA",
   description:
     "Bikin halaman jualan dalam 5 menit, closing via WhatsApp, dan terima pembayaran digital lokal. Cocok untuk seller IG, TikTok, UMKM, dan reseller.",
 };
