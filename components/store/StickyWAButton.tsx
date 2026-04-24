@@ -24,7 +24,7 @@ export default function StickyWAButton({ phone, storeName, storeId }: Props) {
   }
 
   return (
-    <div className="fixed bottom-0 inset-x-0 z-50 px-4 pb-5 pt-4 bg-gradient-to-t from-[#FFF5E6]/95 via-[#FFF5E6]/70 to-transparent pointer-events-none">
+    <div className="fixed bottom-0 inset-x-0 z-50 px-4 pb-5 pt-4 bg-gradient-to-t from-white/95 via-white/70 to-transparent pointer-events-none">
       <a
         href={url}
         target="_blank"
